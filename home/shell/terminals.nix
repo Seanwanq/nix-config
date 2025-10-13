@@ -10,7 +10,7 @@ in
     enable = true;
     settings = {
       main = {
-        font = "${font}:size=11";
+        font = "${font}:size=24";
         dpi-aware = "yes";
       };
       
