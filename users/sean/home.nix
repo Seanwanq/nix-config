@@ -10,7 +10,8 @@
 
     # ../../home/fcitx5
     # ../../home/i3
-    ../../home/niri
+    # ../../home/niri
+    ../../home/sway
     ../../home/programs
     ../../home/rofi
     ../../home/shell

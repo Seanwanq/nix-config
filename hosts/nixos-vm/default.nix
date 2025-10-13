@@ -9,7 +9,8 @@
     [ # Include the results of the hardware scan.
       ../../modules/system.nix
       # ../../modules/i3.nix
-      ../../modules/niri.nix
+      # ../../modules/niri.nix
+      ../../modules/sway.nix
 
       ./hardware-configuration.nix
     ];
