@@ -23,9 +23,9 @@
       };
       
       # 启动栏
-      bars = [{
-        status_command = "${pkgs.i3status}/bin/i3status";
-      }];
+      # bars = [{
+      #   status_command = "${pkgs.i3status}/bin/i3status";
+      # }];
       
       # 输出设置 - 2倍缩放
       startup = [
