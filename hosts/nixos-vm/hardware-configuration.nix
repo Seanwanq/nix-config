@@ -29,6 +29,6 @@
   
   # VirtualBox Guest Additions 配置
   virtualisation.virtualbox.guest.enable = true;
-  virtualisation.virtualbox.guest.draganddrop = true;  # 启用拖放
+  virtualisation.virtualbox.guest.dragAndDrop = true;  # 启用拖放
   virtualisation.virtualbox.guest.clipboard = true;     # 启用剪贴板共享
 }
