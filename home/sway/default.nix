@@ -20,13 +20,15 @@
         # 应用启动器 (使用 wmenu,因为它在你的 extraPackages 中)
         "${modifier}+d" = "exec wmenu-run";
       };
-      };
       
-    #   # 启动栏
-    #   bars = [{
-    #     command = "${pkgs.waybar}/bin/waybar";
-    #   }];
-    
+      # 输出设置 (显示器配置)
+      output = {
+        "*" = {
+          scale = "2";  # 2倍缩放
+        };
+      };
+    };
+      
     extraConfig = ''
       # 额外配置
       default_border pixel 2
