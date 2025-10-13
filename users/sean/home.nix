@@ -9,10 +9,10 @@
     ../../home/core.nix
 
     # ../../home/fcitx5
-    # ../../home/i3
+    ../../home/i3        # 启用 i3 配置
     # ../../home/niri
     ../../home/nvim
-    ../../home/sway
+    # ../../home/sway    # 注释掉 sway 配置
     ../../home/programs
     ../../home/rofi
     ../../home/shell

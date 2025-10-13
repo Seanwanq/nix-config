@@ -18,16 +18,16 @@ in {
     # set default applications
     EDITOR = "nvim";
     BROWSER = "firefox";
-    TERMINAL = "foot";  # 使用 foot,因为 ghostty 在 VirtualBox 下有问题
+    TERMINAL = "ghostty";  # 现在可以使用 ghostty了,因为在 X11 下工作良好
 
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
 
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     
-    # Wayland 支持
-    MOZ_ENABLE_WAYLAND = "1";
-    NIXOS_OZONE_WL = "1";
+    # X11 环境变量(移除 Wayland 特定的)
+    # MOZ_ENABLE_WAYLAND = "1";  # 注释掉,让 Firefox 使用 X11
+    # NIXOS_OZONE_WL = "1";      # 注释掉,让 Electron 应用使用 X11
   };
 
   home.shellAliases = {

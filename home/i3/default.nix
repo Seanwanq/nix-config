@@ -1,33 +1,42 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
-  # i3 配置，基于 https://github.com/endeavouros-team/endeavouros-i3wm-setup
-  # 直接从当前文件夹中读取配置文件作为配置内容
-
-  # wallpaper, binary file
-#   home.file.".config/i3/wallpaper.jpg".source = ../../wallpaper.jpg;
-#   home.file.".config/i3/config".source = ./config;
-#   home.file.".config/i3/i3blocks.conf".source = ./i3blocks.conf;
-#   home.file.".config/i3/keybindings".source = ./keybindings;
-#   home.file.".config/i3/scripts" = {
-#     source = ./scripts;
-#     # copy the scripts directory recursively
-#     recursive = true;
-#     executable = true;  # make all scripts executable
-#   };
-
+  # i3 窗口管理器配置
+  xsession.windowManager.i3 = {
+    enable = true;
+    config = {
+      modifier = "Mod4";  # Super/Windows key
+      terminal = "ghostty";
+      
+      # 基本快捷键
+      keybindings = let
+        modifier = config.xsession.windowManager.i3.config.modifier;
+      in lib.mkOptionDefault {
+        # 启动终端
+        "${modifier}+Return" = "exec ghostty";
+        
+        # 应用启动器
+        "${modifier}+d" = "exec rofi -show run";
+      };
+      
+      # 启动栏
+      bars = [{
+        status_command = "${pkgs.i3status}/bin/i3status";
+      }];
+      
+      # 输出设置 - 2倍缩放
+      startup = [
+        { command = "xrandr --output Virtual-1 --scale 0.5x0.5"; always = false; notification = false; }
+      ];
+    };
+  };
 
   # set cursor size and dpi for 4k monitor
   xresources.properties = {
-    "Xcursor.size" = 16;
+    "Xcursor.size" = 32;  # 适应 2560x1440 分辨率
     "Xft.dpi" = 192;
   };
-
-  # 直接以 text 的方式，在 nix 配置文件中硬编码文件内容
-  # home.file.".xxx".text = ''
-  #     xxx
-  # '';
-
 }

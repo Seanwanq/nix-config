@@ -8,9 +8,9 @@
   imports =
     [ # Include the results of the hardware scan.
       ../../modules/system.nix
-      # ../../modules/i3.nix
+      ../../modules/i3.nix      # 使用 i3 窗口管理器
       # ../../modules/niri.nix
-      ../../modules/sway.nix
+      # ../../modules/sway.nix  # 注释掉 sway
 
       ./hardware-configuration.nix
     ];
