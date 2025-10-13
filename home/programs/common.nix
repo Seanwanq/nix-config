@@ -84,11 +84,11 @@
           "git"
           "sudo"
         ];
+        theme = "fishy";
       };
       autosuggestion = {
           enable = true;
           highlight = "fg=#ff00ff,bg=cyan,bold,underline";
-          theme = "fishy";
       };
       autocd = false;
     };
