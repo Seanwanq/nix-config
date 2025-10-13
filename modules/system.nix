@@ -142,6 +142,7 @@
     scrot
     fastfetch
     xfce.thunar # xfce4's file manager
+    wl-clipboard # Wayland 剪贴板工具(用于 VirtualBox 剪贴板共享)
   ];
 
   programs.zsh.enable = true;

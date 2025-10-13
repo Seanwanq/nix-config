@@ -10,6 +10,12 @@
       terminal = "foot";  # 暂时使用 foot,因为 ghostty 在 VirtualBox 下有问题
       modifier = "Mod4"; # Mod4 = Super/Windows key
       
+      # Sway 启动时执行的命令
+      startup = [
+        # 启动 VBoxClient 服务以支持剪贴板共享
+        { command = "VBoxClient --clipboard"; }
+      ];
+      
       # 基本快捷键
       keybindings = let
         modifier = config.wayland.windowManager.sway.config.modifier;
