@@ -22,10 +22,10 @@
       };
       };
       
-      # 启动栏
-      bars = [{
-        command = "${pkgs.waybar}/bin/waybar";
-      }];
+    #   # 启动栏
+    #   bars = [{
+    #     command = "${pkgs.waybar}/bin/waybar";
+    #   }];
     
     extraConfig = ''
       # 额外配置
