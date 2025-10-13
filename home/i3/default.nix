@@ -32,6 +32,42 @@
         "${modifier}+Ctrl+Down" = "resize grow height 10 px or 10 ppt";
         "${modifier}+Ctrl+Up" = "resize shrink height 10 px or 10 ppt";
         "${modifier}+Ctrl+Right" = "resize grow width 10 px or 10 ppt";
+        
+        # 电源管理菜单
+        "${modifier}+Shift+e" = "exec ${pkgs.writeShellScript "power-menu" ''
+          #!/bin/bash
+          
+          # 电源管理选项
+          options="⏻ 关机\n🔄 重启\n😴 休眠\n🔒 锁屏\n📴 注销\n❌ 取消"
+          
+          # 使用 rofi 显示菜单
+          selected=$(echo -e "$options" | rofi -dmenu -i -p "电源管理:" -theme-str 'window {width: 300px;}')
+          
+          case "$selected" in
+            "⏻ 关机")
+              systemctl poweroff
+              ;;
+            "🔄 重启")
+              systemctl reboot
+              ;;
+            "😴 休眠")
+              systemctl suspend
+              ;;
+            "🔒 锁屏")
+              i3lock -c 1e1e2e --show-failed-attempts
+              ;;
+            "📴 注销")
+              i3-msg exit
+              ;;
+            *)
+              # 取消或其他选择,不执行任何操作
+              ;;
+          esac
+        ''}";
+        
+        # 直接电源操作快捷键
+        "${modifier}+Shift+q" = "exec i3-msg exit";  # 注销
+        "${modifier}+Shift+l" = "exec i3lock -c 1e1e2e --show-failed-attempts";  # 锁屏
       };
       
       # 启动栏
