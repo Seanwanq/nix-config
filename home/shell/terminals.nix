@@ -38,7 +38,6 @@ in
         bright7 = "a6adc8";   # bright white
       };
     };
-    enableZshIntegration = true;
   };
 
   programs.alacritty = {
