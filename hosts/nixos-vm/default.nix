@@ -8,7 +8,8 @@
   imports =
     [ # Include the results of the hardware scan.
       ../../modules/system.nix
-      ../../modules/i3.nix
+      # ../../modules/i3.nix
+      ../../modules/niri.nix
 
       ./hardware-configuration.nix
     ];
