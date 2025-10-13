@@ -115,7 +115,7 @@ output "eDP-1" {
         // bottom-right
     }
 
-    layout {
+    /- layout {
         // ...layout settings for eDP-1...
     }
 }
@@ -131,5 +131,5 @@ output "Some Company CoolMonitor 1234" {
 binds {
     Mod+Left { focus-column-left; }
     Super+Alt+L { spawn "swaylock"; }
-    Mod+T repeat=false cooldown-ms=500 { spawn "ghostty"; }
+    Mod+T hotkey-overlay-title="Open Ghostty" repeat=false cooldown-ms=500 { spawn "ghostty"; }
 }
