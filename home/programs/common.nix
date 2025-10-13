@@ -41,6 +41,8 @@
     uv
     llvmPackages_21.libcxxClang
     rustup
+
+    trash-cli
   ];
 
   programs = {
