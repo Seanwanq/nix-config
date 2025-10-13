@@ -99,13 +99,13 @@ input {
 
 output "eDP-1" {
     // off
-    mode "1920x1080@120.030"
+    mode "2560x1440@120.030"
     scale 2.0
     transform "90"
     position x=1280 y=0
     variable-refresh-rate // on-demand=true
     focus-at-startup
-    backdrop-color "#001100"
+    backdrop-color "#9a8f12ff"
 
     hot-corners {
         // off
