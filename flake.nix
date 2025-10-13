@@ -30,6 +30,11 @@
       url = "github:catppuccin/bat";
       flake = false;
     };
+    
+    nvim-config = {
+      url = "github:Seanwanq/nvim-config";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
