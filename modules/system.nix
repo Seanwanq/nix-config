@@ -148,7 +148,7 @@
     
     # VSCode 依赖
     libsecret    # 用于密钥管理
-    gnome.keyring # GNOME 密钥环
+    gnome-keyring # GNOME 密钥环
   ];
 
   programs.zsh.enable = true;
