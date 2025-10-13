@@ -89,7 +89,6 @@
           hightlight = "fg=#ff00ff,bg=cyan,bold,underline";
           theme = "fishy";
         };
-        autocd = false;
       };
     };
   };
