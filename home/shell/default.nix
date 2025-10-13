@@ -24,6 +24,10 @@ in {
     DELTA_PAGER = "less -R";
 
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+    
+    # Wayland 支持
+    MOZ_ENABLE_WAYLAND = "1";
+    NIXOS_OZONE_WL = "1";
   };
 
   home.shellAliases = {

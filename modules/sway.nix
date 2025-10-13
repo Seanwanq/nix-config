@@ -5,6 +5,10 @@
         xwayland.enable = true;
         extraPackages = with pkgs; [
             brightnessctl foot grim pulseaudio swayidle swaylock wmenu
+            # 添加 GTK 支持以修复 ghostty 的 Wayland 问题
+            gtk3
+            glib
+            gsettings-desktop-schemas
         ];
         extraSessionCommands = ''
             # SDL:
@@ -15,6 +19,10 @@
             # Fix for some Java AWT applications (e.g. Android Studio),
             # use this if they aren't displayed properly:
             export _JAVA_AWT_WM_NONREPARENTING=1
+            
+            # GTK/GDK 支持 Wayland
+            export GDK_BACKEND=wayland
+            export CLUTTER_BACKEND=wayland
         '';
     };
     waybar.enable = true;
