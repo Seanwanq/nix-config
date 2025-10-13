@@ -5,7 +5,11 @@
     settings = {
       default_session = {
         # 选项 1: 显示登录界面(需要输入密码)
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-user-session --cmd sway";
+        # --time: 显示时间
+        # --remember: 记住上次登录的用户名
+        # --remember-user-session: 记住用户选择的会话
+        # --user-menu: 显示用户菜单(可以按 F2 切换用户)
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-user-session --user-menu --cmd sway";
         
         # 选项 2: 自动登录(无需密码,直接进入 Sway)
         # command = "${pkgs.sway}/bin/sway";
