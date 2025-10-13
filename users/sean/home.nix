@@ -9,7 +9,8 @@
     ../../home/core.nix
 
     # ../../home/fcitx5
-    ../../home/i3
+    # ../../home/i3
+    ../../home/niri
     ../../home/programs
     ../../home/rofi
     ../../home/shell
