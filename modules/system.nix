@@ -128,8 +128,7 @@
   };
 
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # List packages installed在系统级别
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
@@ -146,6 +145,10 @@
     gnumake
     cmake
     gcc14
+    
+    # VSCode 依赖
+    libsecret    # 用于密钥管理
+    gnome.keyring # GNOME 密钥环
   ];
 
   programs.zsh.enable = true;
@@ -162,6 +165,9 @@
     dbus.packages = [pkgs.gcr];
 
     geoclue2.enable = true;
+    
+    # GNOME Keyring - VSCode 需要用于密码管理
+    gnome.gnome-keyring.enable = true;
 
     pipewire = {
       enable = true;

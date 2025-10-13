@@ -27,9 +27,12 @@
       #   status_command = "${pkgs.i3status}/bin/i3status";
       # }];
       
-      # 输出设置 - 2倍缩放
+      # 启动项
       startup = [
-        { command = "xrandr --output Virtual-1 --scale 1x1"; always = false; notification = false; }
+        # 显示器缩放设置
+        { command = "xrandr --output Virtual-1 --scale 0.5x0.5"; always = false; notification = false; }
+        # 启动 GNOME Keyring (VSCode 需要)
+        { command = "gnome-keyring-daemon --start --components=secrets"; always = false; notification = false; }
       ];
     };
   };
