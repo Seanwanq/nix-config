@@ -75,6 +75,23 @@
         "--exact"
       ];
     };
+
+    zsh = {
+      enable = true;
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "git"
+          "sudo"
+        ];
+        autosuggestion = {
+          enable = true;
+          hightlight = "fg=#ff00ff,bg=cyan,bold,underline";
+          theme = "fishy";
+        };
+        autocd = false;
+      };
+    };
   };
 
   services = {
