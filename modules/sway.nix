@@ -5,7 +5,7 @@
     settings = {
       default_session = {
         # 选项 1: 显示登录界面(需要输入密码)
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-user-session --cmd sway";
         
         # 选项 2: 自动登录(无需密码,直接进入 Sway)
         # command = "${pkgs.sway}/bin/sway";
@@ -13,6 +13,11 @@
       };
     };
   };
+  
+  # 确保 greetd 使用正确的环境变量
+  environment.etc."greetd/environments".text = ''
+    sway
+  '';
 
   programs = {
     sway = {

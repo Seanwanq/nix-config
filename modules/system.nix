@@ -71,6 +71,13 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # 设置控制台字体大小(用于启动画面和 TTY)
+  console = {
+    font = "ter-v32n";  # Terminus 字体,32 像素高度
+    packages = [ pkgs.terminus_font ];
+    earlySetup = true;  # 尽早应用字体设置
+  };
+
   fonts = {
     packages = with pkgs; [
       # icon fonts

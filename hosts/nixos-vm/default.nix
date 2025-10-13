@@ -21,8 +21,15 @@
         enable = true;
         device = "/dev/sda";
         useOSProber = true;
+        # GRUB 分辨率设置
+        gfxmodeEfi = "2560x1440";
     };
   };
+
+  # 内核参数 - 设置启动时的视频模式
+  boot.kernelParams = [
+    "video=2560x1440"  # 启动时的分辨率
+  ];
 
   networking.hostName = "nixos-vm"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
