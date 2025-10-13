@@ -20,6 +20,18 @@
         
         # 应用启动器
         "${modifier}+d" = "exec rofi -show run";
+        
+        # 窗口大小调整 (直接快捷键)
+        "${modifier}+Ctrl+h" = "resize shrink width 10 px or 10 ppt";
+        "${modifier}+Ctrl+j" = "resize grow height 10 px or 10 ppt";
+        "${modifier}+Ctrl+k" = "resize shrink height 10 px or 10 ppt";
+        "${modifier}+Ctrl+l" = "resize grow width 10 px or 10 ppt";
+        
+        # 窗口大小调整 (方向键)
+        "${modifier}+Ctrl+Left" = "resize shrink width 10 px or 10 ppt";
+        "${modifier}+Ctrl+Down" = "resize grow height 10 px or 10 ppt";
+        "${modifier}+Ctrl+Up" = "resize shrink height 10 px or 10 ppt";
+        "${modifier}+Ctrl+Right" = "resize grow width 10 px or 10 ppt";
       };
       
       # 启动栏
