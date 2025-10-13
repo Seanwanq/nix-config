@@ -39,8 +39,7 @@
     stylua
     ruff
     uv
-    llvmPackages_20.clang-tools
-    # rustfmt
+    llvmPackages_21.libcxxClang
     rustup
   ];
 
