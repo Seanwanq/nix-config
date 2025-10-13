@@ -11,6 +11,7 @@
     # ../../home/fcitx5
     # ../../home/i3
     # ../../home/niri
+    ../../home/nvim
     ../../home/sway
     ../../home/programs
     ../../home/rofi
