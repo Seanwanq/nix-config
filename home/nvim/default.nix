@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  home.file.".config/nvim/config".source = ./nvim-config;
+  home.file.".config/nvim".source = ./nvim-config;
 
 
 }
