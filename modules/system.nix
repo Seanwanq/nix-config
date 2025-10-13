@@ -143,17 +143,12 @@
     fastfetch
     xfce.thunar # xfce4's file manager
     wl-clipboard # Wayland 剪贴板工具(用于 VirtualBox 剪贴板共享)
+    make
+    cmake
+    gcc14
   ];
 
   programs.zsh.enable = true;
-
-  # programs.yazi = {
-	# enable = true;
-	# # You can omit this if you use overlays
-	# package = yazi.packages.${pkgs.system}.default.override {
-	# 	_7zz = pkgs._7zz-rar;  # Support for RAR extraction
-	# };
-  # };
 
 
   # Enable sound with pipewire.
