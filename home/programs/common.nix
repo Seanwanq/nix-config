@@ -40,7 +40,7 @@
     ruff
     uv
     llvmPackages_20.clang-tools
-    rustfmt
+    # rustfmt
     rustup
   ];
 
