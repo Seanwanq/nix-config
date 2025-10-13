@@ -93,6 +93,11 @@
       autocd = false;
     };
 
+    yazi = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
   };
 
   services = {
