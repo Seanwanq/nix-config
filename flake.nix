@@ -45,7 +45,7 @@
           system = "x86_64-linux";
 
           modules = [
-            ./hosts/nixos-test
+            ./hosts/nixos-vm
             ./users/${username}/nixos.nix
 
             home-manager.nixosModules.home-manager
