@@ -64,7 +64,8 @@ in
   programs.ghostty = {
       enable = true;
       settings = {
-        # Wayland 相关设置
+        # 强制使用 X11 后端而不是 Wayland
+        # 因为 Ghostty 的 Wayland 后端在 VirtualBox 下有问题
         gtk-adwaita = false;
         
         # 主题
@@ -73,9 +74,6 @@ in
         # 字体
         font-family = font;
         font-size = 11;
-        
-        # 渲染设置 - 尝试修复 Wayland 协议错误
-        gtk-single-instance = false;
         
         # 其他基本设置
         window-decoration = true;

@@ -20,8 +20,9 @@
             # use this if they aren't displayed properly:
             export _JAVA_AWT_WM_NONREPARENTING=1
             
-            # GTK/GDK 支持 Wayland
-            export GDK_BACKEND=wayland
+            # GTK/GDK 支持 Wayland,但允许回退到 X11
+            # 不强制 GDK_BACKEND,让应用自己选择
+            # export GDK_BACKEND=wayland
             export CLUTTER_BACKEND=wayland
         '';
     };
