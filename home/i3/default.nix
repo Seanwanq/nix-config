@@ -29,7 +29,7 @@
       
       # 输出设置 - 2倍缩放
       startup = [
-        { command = "xrandr --output Virtual-1 --scale 0.5x0.5"; always = false; notification = false; }
+        { command = "xrandr --output Virtual-1 --scale 1x1"; always = false; notification = false; }
       ];
     };
   };
