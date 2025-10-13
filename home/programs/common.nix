@@ -87,7 +87,7 @@
       };
       autosuggestion = {
           enable = true;
-          hightlight = "fg=#ff00ff,bg=cyan,bold,underline";
+          highlight = "fg=#ff00ff,bg=cyan,bold,underline";
           theme = "fishy";
       };
       autocd = false;
