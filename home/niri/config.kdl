@@ -132,4 +132,6 @@ binds {
     Mod+Left { focus-column-left; }
     Super+Alt+L { spawn "swaylock"; }
     Mod+T hotkey-overlay-title="Open Ghostty" repeat=false cooldown-ms=500 { spawn "ghostty"; }
+    Mod+D hotkey-overlay-title="App Launcher" repeat=false cooldown-ms=500 { spawn "anyrun"; }
+
 }
