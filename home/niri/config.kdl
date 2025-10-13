@@ -107,7 +107,7 @@ output "eDP-1" {
     focus-at-startup
     backdrop-color "#9a8f12ff"
 
-    hot-corners {
+    /- hot-corners {
         // off
         top-left
         // top-right
@@ -126,4 +126,10 @@ output "HDMI-A-1" {
 
 output "Some Company CoolMonitor 1234" {
     // ...settings for CoolMonitor...
+}
+
+binds {
+    Mod+Left { focus-column-left; }
+    Super+Alt+L { spawn "swaylock"; }
+    Mod+T repeat=false cooldown-ms=500 { spawn "ghostty"; }
 }
