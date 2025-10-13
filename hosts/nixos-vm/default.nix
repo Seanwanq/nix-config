@@ -21,8 +21,14 @@
         enable = true;
         device = "/dev/sda";
         useOSProber = true;
-        # GRUB 分辨率设置
+        # GRUB 分辨率设置 (BIOS 模式)
         gfxmodeEfi = "2560x1440";
+        gfxmodeBios = "2560x1440";
+        # 额外的 GRUB 配置
+        extraConfig = ''
+          set gfxmode=2560x1440
+          set gfxpayload=keep
+        '';
     };
   };
 
