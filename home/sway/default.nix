@@ -7,7 +7,7 @@
   wayland.windowManager.sway = {
     enable = true;
     config = {
-      terminal = "ghostty";
+      terminal = "foot";  # 暂时使用 foot,因为 ghostty 在 VirtualBox 下有问题
       modifier = "Mod4"; # Mod4 = Super/Windows key
       
       # 基本快捷键
@@ -15,10 +15,11 @@
         modifier = config.wayland.windowManager.sway.config.modifier;
       in lib.mkOptionDefault {
         # 启动终端
-        "${modifier}+Return" = "exec ghostty";
+        "${modifier}+Return" = "exec foot";
         
         # 应用启动器 (使用 wmenu,因为它在你的 extraPackages 中)
         "${modifier}+d" = "exec wmenu-run";
+      };
       };
       
       # 启动栏

@@ -18,7 +18,7 @@ in {
     # set default applications
     EDITOR = "nvim";
     BROWSER = "firefox";
-    TERMINAL = "ghostty";
+    TERMINAL = "foot";  # 使用 foot,因为 ghostty 在 VirtualBox 下有问题
 
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";

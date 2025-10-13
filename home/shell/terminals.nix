@@ -6,6 +6,40 @@ let
   font = "JetBrainsMono Nerd Font";
 in
 {
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {
+        font = "${font}:size=11";
+        dpi-aware = "yes";
+      };
+      
+      colors = {
+        # Catppuccin Mocha 主题
+        background = "1e1e2e";
+        foreground = "cdd6f4";
+        
+        regular0 = "45475a";  # black
+        regular1 = "f38ba8";  # red
+        regular2 = "a6e3a1";  # green
+        regular3 = "f9e2af";  # yellow
+        regular4 = "89b4fa";  # blue
+        regular5 = "f5c2e7";  # magenta
+        regular6 = "94e2d5";  # cyan
+        regular7 = "bac2de";  # white
+        
+        bright0 = "585b70";   # bright black
+        bright1 = "f38ba8";   # bright red
+        bright2 = "a6e3a1";   # bright green
+        bright3 = "f9e2af";   # bright yellow
+        bright4 = "89b4fa";   # bright blue
+        bright5 = "f5c2e7";   # bright magenta
+        bright6 = "94e2d5";   # bright cyan
+        bright7 = "a6adc8";   # bright white
+      };
+    };
+  };
+
   programs.alacritty = {
     enable = true;
     settings = {
@@ -39,6 +73,9 @@ in
         # 字体
         font-family = font;
         font-size = 11;
+        
+        # 渲染设置 - 尝试修复 Wayland 协议错误
+        gtk-single-instance = false;
         
         # 其他基本设置
         window-decoration = true;
