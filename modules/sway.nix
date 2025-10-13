@@ -1,4 +1,19 @@
-{pkgs, ...}: {
+{pkgs, username, ...}: {
+  # 启用 greetd 显示管理器
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        # 选项 1: 显示登录界面(需要输入密码)
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        
+        # 选项 2: 自动登录(无需密码,直接进入 Sway)
+        # command = "${pkgs.sway}/bin/sway";
+        # user = username;
+      };
+    };
+  };
+
   programs = {
     sway = {
         enable = true;
