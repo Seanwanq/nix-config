@@ -1,1 +1,1 @@
-`sudo nixos-rebuild switch --flake .#nixos-test`
+`sudo nixos-rebuild switch --flake .#nixos-vm`
