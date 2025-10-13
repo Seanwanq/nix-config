@@ -4,9 +4,7 @@
   cache = config.xdg.cacheHome;
 in {
   imports = [
-    # ./nushell
     ./common.nix
-    # ./starship.nix
     ./terminals.nix
   ];
 
@@ -20,7 +18,7 @@ in {
     # set default applications
     EDITOR = "nvim";
     BROWSER = "firefox";
-    TERMINAL = "alacritty";
+    TERMINAL = "ghostty";
 
     # enable scrolling in git diff
     DELTA_PAGER = "less -R";
