@@ -35,6 +35,13 @@
     # dbeaver-bin
     # mycli
     # pgcli
+
+    stylua
+    ruff
+    uv
+    llvmPackages_20.clang-tools
+    rustfmt
+    rustup
   ];
 
   programs = {
