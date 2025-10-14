@@ -15,15 +15,15 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader - 使用 GRUB 并正确安装到磁盘
+  # Bootloader - 使用 GRUB UEFI 模式适配 Hyper-V
   boot.loader = {
     grub = {
       enable = true;
-      device = "/dev/sda";  # 安装到主磁盘
+      device = "nodev";  # UEFI 模式不需要指定设备
+      efiSupport = true;  # 启用 EFI 支持
       useOSProber = true;
-      # 强制重新安装引导加载器
-      forceInstall = true;
     };
+    efi.canTouchEfiVariables = true;
   };
 
   # 内核参数

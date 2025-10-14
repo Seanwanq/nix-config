@@ -11,9 +11,17 @@
   boot.kernelModules = [ "hv_balloon" "hv_utils" "hv_storvsc" "hv_netvsc" ];
   boot.extraModulePackages = [ ];
 
+  # 注意：请根据实际的分区情况调整这些路径
+  # 从诊断看到 /boot 在 sda1，但需要确认根分区位置
   fileSystems."/" =
-    { device = "/dev/sda1";
+    { device = "/dev/sda2";  # 可能需要调整
       fsType = "ext4";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/sda1";  # 确认是 EFI 系统分区
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices = [ ];
