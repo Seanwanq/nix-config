@@ -34,8 +34,6 @@
             rofi-wayland
             # 状态栏
             waybar
-            # 文件管理器
-            thunar
             # GTK 支持
             gtk3 glib gsettings-desktop-schemas
             # 系统工具
@@ -62,10 +60,13 @@
   };
 
   # thunar file manager(part of xfce) related options
-  programs.thunar.plugins = with pkgs.xfce; [
-    thunar-archive-plugin
-    thunar-volman
-  ];
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
 }
