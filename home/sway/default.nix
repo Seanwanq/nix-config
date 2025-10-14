@@ -7,7 +7,7 @@
   wayland.windowManager.sway = {
     enable = true;
     config = {
-      terminal = "foot";  # 使用 foot 终端
+      terminal = "ghostty";  # 使用 ghostty 终端
       modifier = "Mod4"; # Mod4 = Super/Windows key
       
       # Sway 启动时执行的命令
