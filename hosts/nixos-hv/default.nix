@@ -58,14 +58,12 @@
       { x = 1024; y = 768; }
     ];
   };
-
-  # Hyper-V 特定的内核模块和服务
-  boot.kernelModules = [ "hyperv_fb" "hv_balloon" "hv_utils" "hv_storvsc" "hv_netvsc" ];
   
   # 启用 Hyper-V 集成服务
   virtualisation.hypervGuest = {
     enable = true;
-    videoMode = "2560x1440x32";  # 设置为 2560x1440
+    # videoMode 选项已被弃用，移除它
+    # 视频模式现在通过标准工具或 Hyper-V VM 设置配置
   };
 
   # Some programs need SUID wrappers, can be configured further or are
