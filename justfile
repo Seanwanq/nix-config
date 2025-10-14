@@ -68,41 +68,26 @@ fix-resolution:
   echo "分辨率修复完成！"
 
 # 检查显示状态
-
 check-display:
-echo "=== 显示状态检查 ==="
-echo "当前分辨率："
-if command -v swaymsg >/dev/null 2>&1; then
-echo "Sway 输出信息："
-swaymsg -t get_outputs
-else
-xrandr | grep -E "\\*|connected"
-fi
-echo ""
-echo "可用分辨率："
-if command -v swaymsg >/dev/null 2>&1; then
-echo "使用 swaymsg 查看输出信息"
-else
-xrandr --query
-fi
-echo ""
-echo "显示驱动模块："
-lsmod | grep -E "(hyperv|fb|drm)"
+  echo "=== 显示状态检查 ==="
+  echo "Sway 输出信息："
+  swaymsg -t get_outputs
+  echo "显示驱动模块："
+  lsmod | grep -E "(hyperv|fb|drm)"
 
 # Sway 专用分辨率修复
-
 fix-sway-resolution:
-echo "=== 修复 Sway 分辨率 ==="
-echo "1. 检查当前输出..."
-swaymsg -t get_outputs
-echo ""
-echo "2. 设置分辨率为 2560x1440..."
-swaymsg output "*" mode 2560x1440@60Hz
-swaymsg output "*" scale 1
-echo ""
-echo "3. 验证设置..."
-swaymsg -t get_outputs | grep -E "(name|current_mode)"
-echo "分辨率修复完成！"
+  echo "=== 修复 Sway 分辨率 ==="
+  echo "1. 检查当前输出..."
+  swaymsg -t get_outputs
+  echo ""
+  echo "2. 设置分辨率为 2560x1440..."
+  swaymsg output "*" mode 2560x1440@60Hz
+  swaymsg output "*" scale 1
+  echo ""
+  echo "3. 验证设置..."
+  swaymsg -t get_outputs | grep -E "(name|current_mode)"
+  echo "分辨率修复完成！"
 
 git-status:
   git status
