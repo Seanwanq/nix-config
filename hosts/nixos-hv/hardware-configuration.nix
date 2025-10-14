@@ -7,8 +7,8 @@
   imports = [ ];
 
   boot.initrd.availableKernelModules = [ "ata_piix" "ohci_pci" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ "hv_vmbus" "hv_balloon" "hv_storvsc" "hv_netvsc" "hyperv_fb" ];
-  boot.kernelModules = [ "hv_balloon" "hv_utils" "hv_storvsc" "hv_netvsc" "hyperv_fb" "hv_vmbus" ];
+  boot.initrd.kernelModules = [ "hv_vmbus" "hv_balloon" "hv_storvsc" "hv_netvsc" ];
+  boot.kernelModules = [ "hv_balloon" "hv_utils" "hv_storvsc" "hv_netvsc" "hv_vmbus" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =

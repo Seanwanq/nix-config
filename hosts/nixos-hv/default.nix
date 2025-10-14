@@ -28,10 +28,10 @@
 
   # 内核参数
   boot.kernelParams = [
-    # Hyper-V 显示相关参数 - 设置为 2560x1440
-    "video=hyperv_fb:2560x1440"
-    # 或者让系统自动检测最佳分辨率
-    # "video=2560x1440"
+    # Hyper-V 显示相关参数 - 使用通用视频参数
+    "video=2560x1440"
+    # 或者完全让系统自动检测
+    # "quiet"
   ];
 
   networking.hostName = "nixos-hv"; # Define your hostname.
