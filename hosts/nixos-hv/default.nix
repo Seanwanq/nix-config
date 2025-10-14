@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ../../modules/system.nix
       # ../../modules/i3.nix      # 切换到 sway
-      ../../modules/niri.nix      # 启用 niri
+      # ../../modules/niri.nix      # 启用 niri
       ../../modules/sway.nix      # 使用 sway 窗口管理器
 
       ./hardware-configuration.nix
