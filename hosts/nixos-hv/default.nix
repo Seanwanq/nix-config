@@ -46,17 +46,11 @@
 
   # Hyper-V 显示优化配置
   services.xserver = {
+    enable = true;
     # 启用自动分辨率检测 - 2560x1440 优先
-    resolutions = [
-      { x = 2560; y = 1440; }  # 默认首选分辨率
-      { x = 1920; y = 1080; }
-      { x = 1680; y = 1050; }
-      { x = 1600; y = 1200; }
-      { x = 1440; y = 900; }
-      { x = 1366; y = 768; }
-      { x = 1280; y = 1024; }
-      { x = 1024; y = 768; }
-    ];
+    screenSection = ''
+      Option "metamodes" "2560x1440"
+    '';
     # 添加显示驱动配置
     videoDrivers = [ "modesetting" "fbdev" ];
   };
