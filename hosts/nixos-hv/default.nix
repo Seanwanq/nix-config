@@ -15,12 +15,13 @@
       ./hardware-configuration.nix
     ];
 
-  # Bootloader.
+  # Bootloader - 使用 GRUB 无设备模式适配 Hyper-V
   boot.loader = {
     grub = {
-        enable = true;
-        device = "/dev/sda";
-        useOSProber = true;
+      enable = true;
+      device = "nodev";  # 不安装到特定设备
+      useOSProber = true;
+      efiSupport = false;  # 禁用 EFI 支持，使用传统 BIOS
     };
   };
 
