@@ -4,11 +4,6 @@
   lib,
   ...
 }: {
-  # 安装 wayvnc 用于远程桌面
-  home.packages = with pkgs; [
-    wayvnc
-  ];
-
   wayland.windowManager.sway = {
     enable = true;
     config = {
@@ -67,16 +62,6 @@
         timeout 600 'swaymsg "output * dpms off"' \
         resume 'swaymsg "output * dpms on"' \
         before-sleep 'swaylock -f'
-      
-      # 启动 wayvnc 用于远程访问（端口 5900）
-      # 这样可以通过 VNC 连接并设置任意分辨率
-      exec wayvnc -o HEADLESS-1 -r 0.0.0.0 5900
-      
-      # 创建虚拟高分辨率输出
-      output HEADLESS-1 {
-        mode 2560x1440@60Hz
-        position 1920,0
-      }
     '';
   };
 

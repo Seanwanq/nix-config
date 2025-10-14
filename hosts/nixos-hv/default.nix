@@ -41,9 +41,6 @@
     enable = true;
   };
 
-  # 开放 VNC 端口用于远程访问（wayvnc）
-  networking.firewall.allowedTCPPorts = [ 5900 ];
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
