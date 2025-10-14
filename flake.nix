@@ -4,7 +4,7 @@
   # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
     # substituers will be appended to the default substituters when fetching packages
-    # nix com    extra-substituters = [munity's cache server
+    # nix community's cache server
     extra-substituters = [
       "https://nix-community.cachix.org"
     ];
@@ -40,8 +40,30 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
     nixosConfigurations = {
 
-
       nixos-vm = let
+        username = "sean";
+        specialArgs = {inherit username;};
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/nixos-vm
+            ./users/${username}/nixos.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+
+              home-manager.extraSpecialArgs = inputs // specialArgs;
+              home-manager.users.${username} = import ./users/${username}/home.nix;
+            }
+          ];
+        };
+
+      nixos-hv = let
         username = "sean";
         specialArgs = {inherit username;};
       in
@@ -50,7 +72,7 @@
           system = "x86_64-linux";
 
           modules = [
-            ./hosts/nixos-vm
+            ./hosts/nixos-hv
             ./users/${username}/nixos.nix
 
             home-manager.nixosModules.home-manager
