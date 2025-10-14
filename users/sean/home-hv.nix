@@ -10,7 +10,7 @@
 
     # ../../home/fcitx5
     # ../../home/i3        # 在 Hyper-V 中不使用 i3
-    ../../home/niri        # 启用 niri
+    # ../../home/niri        # 启用 niri
     ../../home/nvim
     ../../home/sway        # Hyper-V 中使用 sway
     ../../home/programs
