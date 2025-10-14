@@ -35,12 +35,22 @@
         # 截图
         "Print" = "exec grim ~/截图-$(date +%Y%m%d-%H%M%S).png";
         "${modifier}+Print" = "exec grim -g \"$(slurp)\" ~/截图-$(date +%Y%m%d-%H%M%S).png";
+        
+        # 调试和分辨率设置
+        "${modifier}+Shift+r" = "exec swaymsg output '*' mode 2560x1440@60Hz";
+        "${modifier}+Shift+o" = "exec foot -e sh -c 'swaymsg -t get_outputs | head -20; read'";
       };
       
       # 输出设置 (显示器配置) - 针对 Hyper-V 优化
       output = {
+        # 使用通配符匹配所有输出
         "*" = {
-          # 设置分辨率为 2560x1440，不使用缩放
+          # 先尝试设置具体分辨率
+          mode = "2560x1440@60Hz";
+          scale = "1";
+        };
+        # 也可以尝试具体的输出名称
+        "Virtual-1" = {
           mode = "2560x1440@60Hz";
           scale = "1";
         };
@@ -53,6 +63,15 @@
       default_floating_border pixel 2
       hide_edge_borders smart
       
+      # 强制设置分辨率 - 多种尝试
+      output * mode 2560x1440@60Hz
+      output * scale 1
+      output Virtual-1 mode 2560x1440@60Hz
+      output Virtual-1 scale 1
+      
+      # 如果 2560x1440 不可用，尝试其他高分辨率
+      # output * mode 1920x1080@60Hz
+      
       # 空闲管理
       exec swayidle -w \
         timeout 300 'swaylock -f' \
@@ -60,11 +79,17 @@
         resume 'swaymsg "output * dpms on"' \
         before-sleep 'swaylock -f'
       
-      # 设置壁纸 (如果你有的话)
-      # output * bg /path/to/wallpaper.jpg fill
-      
       # 针对 Hyper-V 的优化
       output * adaptive_sync off
+      
+      # 启动时执行分辨率设置命令
+      exec_always {
+        # 等待一秒让系统稳定
+        sleep 1
+        # 尝试设置分辨率
+        swaymsg output "*" mode 2560x1440@60Hz
+        swaymsg output "*" scale 1
+      }
     '';
   };
 
