@@ -120,6 +120,13 @@ output "eDP-1" {
     }
 }
 
+// Hyper-V 虚拟显示器配置
+output "Virtual-1" {
+    mode "1920x1080@60"
+    scale 1.0
+    position x=0 y=0
+}
+
 output "HDMI-A-1" {
     // ...settings for HDMI-A-1...
 }
