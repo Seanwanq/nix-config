@@ -4,8 +4,11 @@ default:
 update-dependency:
   sudo nix flake update
 
-build:
+build-vm:
   sudo nixos-rebuild switch --flake .#nixos-vm
+
+build-hv:
+  sudo nixos-rebuild switch --flake .#nixos-hv
 
 git-status:
   git status
