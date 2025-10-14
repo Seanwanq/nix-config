@@ -46,6 +46,11 @@
     just
   ];
 
+  # 全局 session 变量，对所有应用生效
+  home.sessionVariables = {
+    PATH = "$HOME/.local/bin:$PATH";
+  };
+
   programs = {
     tmux = {
       enable = true;
@@ -100,6 +105,9 @@
           highlight = "fg=#ff00ff,bg=cyan,bold,underline";
       };
       autocd = false;
+      sessionVariables = {
+        PATH = "$HOME/.local/bin:$PATH";
+      };
     };
 
     yazi = {
