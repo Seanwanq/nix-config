@@ -21,7 +21,7 @@
         modifier = config.wayland.windowManager.sway.config.modifier;
       in lib.mkOptionDefault {
         # 启动终端
-        "${modifier}+Return" = "exec foot";
+        "${modifier}+Return" = "exec ghostty";
         
         # 应用启动器 (使用 rofi)
         "${modifier}+d" = "exec rofi -show drun";
