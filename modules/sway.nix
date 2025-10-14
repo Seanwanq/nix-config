@@ -28,11 +28,18 @@
         enable = true;
         xwayland.enable = true;
         extraPackages = with pkgs; [
-            brightnessctl foot grim pulseaudio swayidle swaylock wmenu
-            # 添加 GTK 支持以修复 ghostty 的 Wayland 问题
-            gtk3
-            glib
-            gsettings-desktop-schemas
+            # 基础工具
+            brightnessctl foot grim slurp pulseaudio swayidle swaylock 
+            # 应用启动器和菜单
+            rofi-wayland
+            # 状态栏
+            waybar
+            # 文件管理器
+            thunar
+            # GTK 支持
+            gtk3 glib gsettings-desktop-schemas
+            # 系统工具
+            wl-clipboard
         ];
         extraSessionCommands = ''
             # SDL:

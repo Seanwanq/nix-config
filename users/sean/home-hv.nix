@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   ##################################################################################################################
   #
-  # All Sean's Home Manager Configuration
+  # Sean's Home Manager Configuration for Hyper-V (Sway)
   #
   ##################################################################################################################
 
@@ -9,10 +9,10 @@
     ../../home/core.nix
 
     # ../../home/fcitx5
-    ../../home/i3        # VirtualBox 中使用 i3
+    # ../../home/i3        # 在 Hyper-V 中不使用 i3
     # ../../home/niri
     ../../home/nvim
-    # ../../home/sway    # VirtualBox 中不使用 sway
+    ../../home/sway    # Hyper-V 中使用 sway
     ../../home/programs
     ../../home/rofi
     ../../home/shell

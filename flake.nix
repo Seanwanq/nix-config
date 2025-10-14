@@ -82,7 +82,7 @@
               home-manager.backupFileExtension = "backup";
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./users/${username}/home.nix;
+              home-manager.users.${username} = import ./users/${username}/home-hv.nix;  # 使用 Hyper-V 专用配置
             }
           ];
         };
