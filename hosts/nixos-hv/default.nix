@@ -28,7 +28,10 @@
 
   # 内核参数
   boot.kernelParams = [
-    # 移除特定分辨率设置，让系统自动检测
+    # Hyper-V 显示相关参数 - 设置为 2560x1440
+    "video=hyperv_fb:2560x1440"
+    # 或者让系统自动检测最佳分辨率
+    # "video=2560x1440"
   ];
 
   networking.hostName = "nixos-hv"; # Define your hostname.
@@ -40,6 +43,30 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  # Hyper-V 显示优化配置
+  services.xserver = {
+    # 启用自动分辨率检测 - 2560x1440 优先
+    resolutions = [
+      { x = 2560; y = 1440; }  # 默认首选分辨率
+      { x = 1920; y = 1080; }
+      { x = 1680; y = 1050; }
+      { x = 1600; y = 1200; }
+      { x = 1440; y = 900; }
+      { x = 1366; y = 768; }
+      { x = 1280; y = 1024; }
+      { x = 1024; y = 768; }
+    ];
+  };
+
+  # Hyper-V 特定的内核模块和服务
+  boot.kernelModules = [ "hyperv_fb" "hv_balloon" "hv_utils" "hv_storvsc" "hv_netvsc" ];
+  
+  # 启用 Hyper-V 集成服务
+  virtualisation.hypervGuest = {
+    enable = true;
+    videoMode = "2560x1440x32";  # 设置为 2560x1440
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

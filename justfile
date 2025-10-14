@@ -56,6 +56,29 @@ verify-config:
 show-build-log:
   journalctl -u nixos-rebuild --no-pager -n 50
 
+# 修复 Hyper-V 分辨率
+fix-resolution:
+  echo "=== 修复 Hyper-V 分辨率 ==="
+  echo "1. 重启 X11 服务..."
+  sudo systemctl restart display-manager
+  echo "2. 检查当前分辨率..."
+  xrandr
+  echo "3. 设置分辨率为 2560x1440..."
+  xrandr --output Virtual-1 --mode 2560x1440 || xrandr --output default --mode 2560x1440 || echo "自动设置失败，请手动调整"
+  echo "分辨率修复完成！"
+
+# 检查显示状态
+check-display:
+  echo "=== 显示状态检查 ==="
+  echo "当前分辨率："
+  xrandr | grep -E "\\*|connected"
+  echo ""
+  echo "可用分辨率："
+  xrandr --query
+  echo ""
+  echo "显示驱动模块："
+  lsmod | grep -E "(hyperv|fb|drm)"
+
 git-status:
   git status
 
