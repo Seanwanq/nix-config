@@ -43,6 +43,7 @@
     rustup
 
     trash-cli
+    just
   ];
 
   programs = {
