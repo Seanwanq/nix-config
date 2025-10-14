@@ -26,13 +26,18 @@
     efi.canTouchEfiVariables = true;
   };
 
-  # 内核参数
+  # 内核参数 - 针对 Hyper-V 的显示优化
   boot.kernelParams = [
-    # Hyper-V 显示相关参数 - 使用通用视频参数
-    "video=2560x1440"
-    # 或者完全让系统自动检测
-    # "quiet"
+    # 强制启用 hyperv_fb 帧缓冲驱动
+    "video=hyperv_fb:2560x1440"
+    # 或者使用 simpledrm
+    # "video=simpledrm:2560x1440"
   ];
+
+  # 确保加载 Hyper-V 显示相关内核模块
+  boot.kernelModules = [ "hyperv_fb" "hyperv_drm" ];
+  # 可选：blacklist 可能冲突的驱动
+  # boot.blacklistedKernelModules = [ "bochs_drm" ];
 
   networking.hostName = "nixos-hv"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -43,36 +48,18 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Hyper-V 显示优化配置
-  services.xserver = {
-    enable = true;
-    # 启用自动分辨率检测 - 2560x1440 优先
-    screenSection = ''
-      Option "metamodes" "2560x1440"
-    '';
-    # 添加显示驱动配置
-    videoDrivers = [ "modesetting" "fbdev" ];
-  };
-
-  # 添加启动后自动设置分辨率的服务
-  systemd.services.set-resolution = {
-    description = "Set display resolution to 2560x1440";
-    after = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      User = "sean";
-      Environment = "DISPLAY=:0";
-      ExecStart = "${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --mode 2560x1440 || ${pkgs.xorg.xrandr}/bin/xrandr --output default --mode 2560x1440 || true";
-    };
-  };
   
   # 启用 Hyper-V 集成服务
   virtualisation.hypervGuest = {
     enable = true;
-    # videoMode 选项已被弃用，移除它
-    # 视频模式现在通过标准工具或 Hyper-V VM 设置配置
+  };
+
+  # 为 Wayland/Sway 设置环境变量
+  environment.sessionVariables = {
+    # 强制 Wayland 使用特定的后端
+    WLR_BACKENDS = "drm";
+    # 启用 DRM 日志以便调试
+    WLR_DRM_NO_ATOMIC = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
