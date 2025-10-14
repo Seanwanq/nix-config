@@ -66,7 +66,7 @@
         ''}";
         
         # 直接电源操作快捷键
-        "${modifier}+Shift+q" = "exec i3-msg exit";  # 注销
+        # "${modifier}+Shift+q" = "exec i3-msg exit";  # 注销
         "${modifier}+Shift+l" = "exec i3lock -c 1e1e2e --show-failed-attempts";  # 锁屏
       };
       
