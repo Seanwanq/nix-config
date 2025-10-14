@@ -26,19 +26,6 @@
     efi.canTouchEfiVariables = true;
   };
 
-  # 内核参数 - 针对 Hyper-V 的显示优化
-  boot.kernelParams = [
-    # 强制启用 hyperv_fb 帧缓冲驱动
-    "video=hyperv_fb:2560x1440"
-    # 或者使用 simpledrm
-    # "video=simpledrm:2560x1440"
-  ];
-
-  # 确保加载 Hyper-V 显示相关内核模块
-  boot.kernelModules = [ "hyperv_fb" "hyperv_drm" ];
-  # 可选：blacklist 可能冲突的驱动
-  # boot.blacklistedKernelModules = [ "bochs_drm" ];
-
   networking.hostName = "nixos-hv"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -52,14 +39,6 @@
   # 启用 Hyper-V 集成服务
   virtualisation.hypervGuest = {
     enable = true;
-  };
-
-  # 为 Wayland/Sway 设置环境变量
-  environment.sessionVariables = {
-    # 强制 Wayland 使用特定的后端
-    WLR_BACKENDS = "drm";
-    # 启用 DRM 日志以便调试
-    WLR_DRM_NO_ATOMIC = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
