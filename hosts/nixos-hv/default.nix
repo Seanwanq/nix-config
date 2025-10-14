@@ -57,6 +57,21 @@
       { x = 1280; y = 1024; }
       { x = 1024; y = 768; }
     ];
+    # 添加显示驱动配置
+    videoDrivers = [ "modesetting" "fbdev" ];
+  };
+
+  # 添加启动后自动设置分辨率的服务
+  systemd.services.set-resolution = {
+    description = "Set display resolution to 2560x1440";
+    after = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "sean";
+      Environment = "DISPLAY=:0";
+      ExecStart = "${pkgs.xorg.xrandr}/bin/xrandr --output Virtual-1 --mode 2560x1440 || ${pkgs.xorg.xrandr}/bin/xrandr --output default --mode 2560x1440 || true";
+    };
   };
   
   # 启用 Hyper-V 集成服务
