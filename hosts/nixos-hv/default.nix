@@ -41,6 +41,27 @@
     enable = true;
   };
 
+  # 启用 X11 用于 xrdp（增强会话模式需要）
+  services.xserver = {
+    enable = true;
+    displayManager.lightdm.enable = true;
+  };
+
+  # 启用 xrdp 以支持 Hyper-V 增强会话模式
+  services.xrdp = {
+    enable = true;
+    defaultWindowManager = "sway";
+    openFirewall = true;
+  };
+
+  # 允许 RDP 端口
+  networking.firewall.allowedTCPPorts = [ 3389 ];
+
+  # 为 xrdp 用户添加必要的权限
+  users.users.sean = {
+    extraGroups = [ "video" "render" ];
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
