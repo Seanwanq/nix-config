@@ -21,6 +21,8 @@
         enable = true;
         device = "/dev/sda";
         useOSProber = true;
+        # do not need to keep too much generations
+        configurationLimit = 10;
         # GRUB 分辨率设置 (BIOS 模式)
         gfxmodeEfi = "2560x1440";
         gfxmodeBios = "2560x1440";
