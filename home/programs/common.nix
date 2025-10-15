@@ -3,6 +3,7 @@
   pkgs,
   catppuccin-bat,
   yazi-dracula,
+  yazi-plugins,
   ...
 }: {
   home.packages = with pkgs; [
@@ -137,6 +138,14 @@
         dracula = yazi-dracula;
       };
       
+      # yazi plugins - 从官方插件仓库安装
+      plugins = {
+        full-border = "${yazi-plugins}/full-border.yazi";
+        # 以后可以添加更多插件，例如:
+        # smart-enter = "${yazi-plugins}/smart-enter.yazi";
+        # chmod = "${yazi-plugins}/chmod.yazi";
+      };
+      
       # theme.toml 配置 - 激活 dracula flavor
       theme = {
         flavor = {
@@ -145,8 +154,9 @@
         };
       };
       
-      # init.lua 配置 - 自定义 linemode
+      # init.lua 配置 - 自定义 linemode 和启用插件
       initLua = ''
+        -- 自定义 linemode: 显示文件大小和修改时间
         function Linemode:size_and_mtime()
           local time = math.floor(self._file.cha.mtime or 0)
           if time == 0 then
@@ -160,6 +170,9 @@
           local size = self._file:size()
           return string.format("%s %s", size and ya.readable_size(size) or "-", time)
         end
+        
+        -- 启用 full-border 插件
+        require("full-border"):setup()
       '';
     };
 

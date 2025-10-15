@@ -35,6 +35,11 @@
       url = "github:dracula/yazi";
       flake = false;
     };
+
+    yazi-plugins = {
+      url = "github:yazi-rs/plugins";
+      flake = false;
+    };
     
     nvim-config = {
       url = "github:Seanwanq/nvim-config";
