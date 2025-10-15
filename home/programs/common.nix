@@ -111,7 +111,7 @@
       };
       
       # 在 .zshrc 中加载 dracula 主题
-      initExtra = ''
+      initContent = ''
         # Dracula theme
         source ${zsh-dracula}/dracula.zsh-theme
       '';
