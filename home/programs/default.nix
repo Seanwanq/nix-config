@@ -6,5 +6,6 @@
     ./media.nix
     ./xdg.nix
     ./vscode.nix
+    ./yazi.nix
   ];
 }
