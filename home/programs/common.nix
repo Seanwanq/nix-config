@@ -13,7 +13,6 @@
     # utils
     ripgrep
     yq-go # https://github.com/mikefarah/yq
-    htop
 
     # misc
     libnotify
