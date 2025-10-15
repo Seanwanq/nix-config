@@ -114,18 +114,21 @@
       enable = true;
       enableZshIntegration = true;
       
-      # 应用 dracula flavor
-      flavors = {
-        dracula = yazi-dracula;
-      };
-      
+      # yazi.toml 配置
       settings = {
-        manager = {
+        # 使用新的 [mgr] 替代已弃用的 [manager]
+        mgr = {
           show_hidden = true;
         };
       };
       
-      # 在 theme.toml 中激活 dracula flavor
+      # 应用 dracula flavor
+      # 将 flavor 文件链接到 ~/.config/yazi/flavors/
+      flavors = {
+        dracula = yazi-dracula;
+      };
+      
+      # theme.toml 配置 - 激活 dracula flavor
       theme = {
         flavor = {
           use = "dracula";
