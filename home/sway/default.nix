@@ -44,8 +44,8 @@
       # 输出设置 (显示器配置) - 保持简单，让 Sway 自动检测
       output = {
         "*" = {
-          mode = "1920x1080@60Hz";
-          scale = "2";
+          mode = "2560x1440@60Hz";
+          scale = "1.5";
         };
       };
     };
@@ -67,7 +67,7 @@
 
   # 设置光标和 DPI - 针对高分辨率优化
   xresources.properties = {
-    "Xcursor.size" = 24;  # 增大光标
-    "Xft.dpi" = 96;       # 标准 DPI，不缩放
+    "Xcursor.size" = 32;  # 增大光标
+    "Xft.dpi" = 192;       # 标准 DPI，不缩放
   };
 }
