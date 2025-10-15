@@ -2,6 +2,7 @@
   lib,
   pkgs,
   catppuccin-bat,
+  zsh-dracula,
   ...
 }: {
   home.packages = with pkgs; [
@@ -97,7 +98,8 @@
           "git"
           "sudo"
         ];
-        theme = "dracula";
+        # 使用简单的内置主题，因为我们会通过 initExtra 加载 dracula
+        theme = "robbyrussell";
       };
       autosuggestion = {
           enable = true;
@@ -107,6 +109,12 @@
       sessionVariables = {
         PATH = "$HOME/.local/bin:$PATH";
       };
+      
+      # 在 .zshrc 中加载 dracula 主题
+      initExtra = ''
+        # Dracula theme
+        source ${zsh-dracula}/dracula.zsh-theme
+      '';
     };
 
   };
