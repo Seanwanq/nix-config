@@ -31,11 +31,13 @@
     };
 
     keymap = {
-        mgr.prepend_keymap = {
-            on = "l";
-            run = "plugin smart-enter";
-            desc = "Enter the child directory, or open the file";
-        };
+        mgr.prepend_keymap = [
+            {
+                on = "l";
+                run = "plugin smart-enter";
+                desc = "Enter the child directory, or open the file";
+            }
+        ];
     };
     
     # yazi plugins - 从官方插件仓库安装
