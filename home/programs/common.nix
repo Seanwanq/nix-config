@@ -97,7 +97,7 @@
           "git"
           "sudo"
         ];
-        theme = "fishy";
+        theme = "dracula";
       };
       autosuggestion = {
           enable = true;
