@@ -20,7 +20,8 @@
         rofi # application launcher, the same as dmenu
         dunst # notification daemon
         i3blocks # status bar
-        # 锁屏使用 GDM (dm-tool lock)，不需要独立的锁屏工具
+        i3lock # 轻量锁屏（配合 xss-lock 使用）
+        xss-lock # 将系统锁屏事件绑定到屏幕锁
         xautolock # lock screen after some time
         i3status # provide information to i3bar
         i3-gaps # i3 with gaps

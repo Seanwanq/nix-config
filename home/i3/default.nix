@@ -54,7 +54,7 @@
               systemctl suspend
               ;;
             "🔒 锁屏")
-              dm-tool lock  # 使用 GDM 登录界面作为锁屏
+              loginctl lock-session
               ;;
             "📴 注销")
               i3-msg exit
@@ -67,7 +67,7 @@
         
         # 直接电源操作快捷键
         # "${modifier}+Shift+q" = "exec i3-msg exit";  # 注销
-        "${modifier}+Shift+l" = "exec dm-tool lock";  # 使用 GDM 登录界面锁屏
+        "${modifier}+Shift+l" = "exec loginctl lock-session";  # 锁屏（调用系统锁屏）
       };
       
       # 启动栏
@@ -81,6 +81,9 @@
         { command = "xrandr --output Virtual-1 --scale 1x1"; always = false; notification = false; }
         # 启动 GNOME Keyring (VSCode 需要)
         { command = "gnome-keyring-daemon --start --components=secrets"; always = false; notification = false; }
+        # xss-lock: 监听系统锁屏事件，并调用 i3lock 锁屏
+        # 这样 loginctl lock-session 就会触发锁屏
+        { command = "xss-lock --transfer-sleep-lock -- i3lock -c 1e1e2e --show-failed-attempts --nofork"; always = true; notification = false; }
       ];
     };
   };
