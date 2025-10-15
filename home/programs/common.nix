@@ -131,7 +131,8 @@
       # theme.toml 配置 - 激活 dracula flavor
       theme = {
         flavor = {
-          use = "dracula";
+          light = "dracula";
+          dark = "dracula";
         };
       };
     };
