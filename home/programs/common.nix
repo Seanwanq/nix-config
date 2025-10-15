@@ -101,7 +101,7 @@
       };
       autosuggestion = {
           enable = true;
-          highlight = "fg=#dadada,bold,underline";
+          highlight = "fg=#8080c6,bold,underline";
       };
       autocd = true;
       sessionVariables = {
