@@ -98,22 +98,25 @@
           "git"
           "sudo"
         ];
-        # 使用简单的内置主题，因为我们会通过 initExtra 加载 dracula
-        theme = "robbyrussell";
+        # 使用 dracula 主题
+        theme = "dracula";
+        custom = "$HOME/.oh-my-zsh-custom";
       };
       autosuggestion = {
           enable = true;
-          highlight = "fg=#ff00ff,bg=cyan,bold,underline";
+          highlight = "bold,underline";
       };
       autocd = false;
       sessionVariables = {
         PATH = "$HOME/.local/bin:$PATH";
       };
       
-      # 在 .zshrc 中加载 dracula 主题
+      # 设置 dracula 主题和 lib 文件
       initContent = ''
-        # Dracula theme
-        source ${zsh-dracula}/dracula.zsh-theme
+        # 创建自定义主题目录并链接 dracula 主题
+        mkdir -p $HOME/.oh-my-zsh-custom/themes
+        ln -sf ${zsh-dracula}/dracula.zsh-theme $HOME/.oh-my-zsh-custom/themes/dracula.zsh-theme
+        ln -sf ${zsh-dracula}/lib $HOME/.oh-my-zsh-custom/themes/lib
       '';
     };
 
