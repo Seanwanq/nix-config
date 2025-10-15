@@ -20,7 +20,7 @@
         rofi # application launcher, the same as dmenu
         dunst # notification daemon
         i3blocks # status bar
-        i3lock # default i3 screen locker
+        # 锁屏使用 GDM (dm-tool lock)，不需要独立的锁屏工具
         xautolock # lock screen after some time
         i3status # provide information to i3bar
         i3-gaps # i3 with gaps

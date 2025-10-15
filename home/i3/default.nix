@@ -54,7 +54,7 @@
               systemctl suspend
               ;;
             "🔒 锁屏")
-              i3lock -c 1e1e2e --show-failed-attempts
+              dm-tool lock  # 使用 GDM 登录界面作为锁屏
               ;;
             "📴 注销")
               i3-msg exit
@@ -67,7 +67,7 @@
         
         # 直接电源操作快捷键
         # "${modifier}+Shift+q" = "exec i3-msg exit";  # 注销
-        "${modifier}+Shift+l" = "exec i3lock -c 1e1e2e --show-failed-attempts";  # 锁屏
+        "${modifier}+Shift+l" = "exec dm-tool lock";  # 使用 GDM 登录界面锁屏
       };
       
       # 启动栏
