@@ -31,19 +31,19 @@
     };
 
     keymap = {
-        mgr.prepend_keymap = [
-            {
-                on = "l";
-                run = "plugin smart-enter";
-                desc = "Enter the child directory, or open the file";
-            }
-        ];
+        # mgr.prepend_keymap = [
+        #     {
+        #         on = "l";
+        #         run = "plugin smart-enter";
+        #         desc = "Enter the child directory, or open the file";
+        #     }
+        # ];
     };
     
     # yazi plugins - 从官方插件仓库安装
     plugins = {
       full-border = "${yazi-plugins}/full-border.yazi";
-      smart-enter = "${yazi-plugins}/smart-enter.yazi";
+    #   smart-enter = "${yazi-plugins}/smart-enter.yazi";
       # 以后可以添加更多插件，例如:
       # smart-enter = "${yazi-plugins}/smart-enter.yazi";
       # chmod = "${yazi-plugins}/chmod.yazi";
