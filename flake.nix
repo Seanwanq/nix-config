@@ -30,6 +30,11 @@
       url = "github:catppuccin/bat";
       flake = false;
     };
+
+    yazi-dracula = {
+      url = "github:dracula/yazi";
+      flake = false;
+    };
     
     nvim-config = {
       url = "github:Seanwanq/nvim-config";

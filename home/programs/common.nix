@@ -2,6 +2,7 @@
   lib,
   pkgs,
   catppuccin-bat,
+  yazi-dracula,
   ...
 }: {
   home.packages = with pkgs; [
@@ -112,6 +113,24 @@
     yazi = {
       enable = true;
       enableZshIntegration = true;
+      
+      # 应用 dracula flavor
+      flavors = {
+        dracula = yazi-dracula;
+      };
+      
+      settings = {
+        manager = {
+          show_hidden = true;
+        };
+      };
+      
+      # 在 theme.toml 中激活 dracula flavor
+      theme = {
+        flavor = {
+          use = "dracula";
+        };
+      };
     };
 
   };
