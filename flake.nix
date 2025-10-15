@@ -41,11 +41,6 @@
       flake = false;
     };
 
-    zsh-dracula = {
-      url = "github:dracula/zsh";
-      flake = false;
-    };
-    
     nvim-config = {
       url = "github:Seanwanq/nvim-config";
       flake = false;

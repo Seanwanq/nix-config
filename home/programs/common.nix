@@ -2,7 +2,6 @@
   lib,
   pkgs,
   catppuccin-bat,
-  zsh-dracula,
   ...
 }: {
   home.packages = with pkgs; [
@@ -98,26 +97,17 @@
           "git"
           "sudo"
         ];
-        # 使用 dracula 主题
-        theme = "dracula";
-        custom = "$HOME/.oh-my-zsh-custom";
+        theme = "robbyrussell";
       };
       autosuggestion = {
           enable = true;
-          highlight = "bold,underline";
+          highlight = "fg=#dadada,bold,underline";
       };
-      autocd = false;
+      autocd = true;
       sessionVariables = {
         PATH = "$HOME/.local/bin:$PATH";
       };
       
-      # 设置 dracula 主题和 lib 文件
-      initContent = ''
-        # 创建自定义主题目录并链接 dracula 主题
-        mkdir -p $HOME/.oh-my-zsh-custom/themes
-        ln -sf ${zsh-dracula}/dracula.zsh-theme $HOME/.oh-my-zsh-custom/themes/dracula.zsh-theme
-        ln -sf ${zsh-dracula}/lib $HOME/.oh-my-zsh-custom/themes/lib
-      '';
     };
 
   };
