@@ -23,13 +23,26 @@
         useOSProber = true;
         # do not need to keep too much generations
         configurationLimit = 10;
-        # GRUB 分辨率设置 (BIOS 模式)
-        gfxmodeEfi = "2560x1440";
-        gfxmodeBios = "2560x1440";
+        
+        # GRUB 分辨率设置
+        # 常见的 VESA 模式分辨率（BIOS 模式支持）:
+        # 1024x768, 1280x720, 1280x1024, 1920x1080
+        gfxmodeEfi = "auto";
+        gfxmodeBios = "auto";
+        
         # 额外的 GRUB 配置
         extraConfig = ''
-          set gfxmode=2560x1440
+          # 设置图形模式，auto 让 GRUB 自动选择最佳分辨率
+          # 或者手动指定: set gfxmode=1920x1080,1280x1024,1024x768,auto
+          set gfxmode=auto
           set gfxpayload=keep
+          
+          # 启用 VESA BIOS 扩展支持
+          insmod vbe
+          insmod vga
+          
+          # 加载视频驱动
+          insmod all_video
         '';
     };
   };
