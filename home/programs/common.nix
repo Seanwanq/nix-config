@@ -4,20 +4,17 @@
   catppuccin-bat,
   ...
 }: {
-  home.packages = with pkgs;     btop.enable = true; # replacement of htop/nmon
-    eza.enable = true; # A modern replacement for 'ls'
-    jq.enable = true; # A lightweight and flexible command-line JSON processor
+  home.packages = with pkgs;     
+  [ 
+    btop # replacement of htop/nmon
+    eza # A modern replacement for 'ls'
+    jq # A lightweight and flexible command-line JSON processor
     
-    ssh = {
-      enable = true;
-      # 1Password SSH agent integration
-      extraConfig = ''
-        Host *
-            IdentityAgent ~/.1password/agent.sock
-      '';
-    };
+
     
-    aria2.enable = true; # archives
+    aria2
+    
+    # archives
     zip
     unzip
     p7zip
@@ -122,7 +119,14 @@
       
     };
 
-
+    ssh = {
+      enable = true;
+      # 1Password SSH agent integration
+      extraConfig = ''
+        Host *
+            IdentityAgent ~/.1password/agent.sock
+      '';
+    };
   };
 
   services = {
