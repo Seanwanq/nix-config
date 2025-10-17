@@ -15,8 +15,7 @@ in {
     LESSKEY = c + "/less/lesskey";
     WINEPREFIX = d + "/wine";
 
-    # 1Password SSH agent
-    SSH_AUTH_SOCK = "${config.home.homeDirectory}/.1password/agent.sock";
+
 
     # set default applications
     EDITOR = "nvim";

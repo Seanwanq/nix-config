@@ -4,8 +4,20 @@
   catppuccin-bat,
   ...
 }: {
-  home.packages = with pkgs; [
-    # archives
+  home.packages = with pkgs;     btop.enable = true; # replacement of htop/nmon
+    eza.enable = true; # A modern replacement for 'ls'
+    jq.enable = true; # A lightweight and flexible command-line JSON processor
+    
+    ssh = {
+      enable = true;
+      # 1Password SSH agent integration
+      extraConfig = ''
+        Host *
+            IdentityAgent ~/.1password/agent.sock
+      '';
+    };
+    
+    aria2.enable = true; # archives
     zip
     unzip
     p7zip
@@ -43,9 +55,6 @@
 
     trash-cli
     just
-
-    _1password-gui
-    _1password-cli
   ];
 
   # 全局 session 变量，对所有应用生效
@@ -109,18 +118,10 @@
       autocd = true;
       sessionVariables = {
         PATH = "$HOME/.local/bin:$PATH";
-        SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";
       };
       
     };
 
-    ssh = {
-      matchBlocks = {
-        "*" = {
-          identityAgent = "~/.1password/agent.sock";
-        };
-      };
-    };
 
   };
 
