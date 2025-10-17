@@ -12,15 +12,6 @@
         identityFile = "~/.ssh/GitHub 2025";
         identitiesOnly = true;
       };
-      
-      # Default configuration for all other hosts
-      "*" = {
-        forwardAgent = false;
-        compression = false;
-        serverAliveInterval = 0;
-        serverAliveCountMax = 3;
-        hashKnownHosts = false;
-      };
     };
   };
 
