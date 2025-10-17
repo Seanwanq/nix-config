@@ -1,8 +1,14 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
+  # Install quickshell package
+  home.packages = [
+    inputs.quickshell.packages.${pkgs.system}.default
+  ];
+
   # Noctalia shell configuration
   programs.noctalia-shell = {
     enable = true;
@@ -52,6 +58,12 @@
               id = "Volume";
             }
             {
+              id = "Brightness";
+            }
+            {
+              id = "WiFi";
+            }
+            {
               id = "Clock";
               formatHorizontal = "HH:mm";
               formatVertical = "HH mm";
@@ -62,6 +74,31 @@
             }
           ];
         };
+      };
+      general = {};
+      location = {
+        name = "Utrecht, The Netherlands";
+        monthBeforeDay = true;
+      };
+      notifications = {
+        alwaysOnTop = true;
+      };
+      colorSchemes = {
+        predefinedScheme = "Dracula";
+        darkMode = true;
+      };
+      templates = {
+        gtk = true;
+        qt = true;
+        kcolorscheme = true;
+        ghostty = true;
+        enableUserTemplates = true;
+      };
+      nightLight = {
+        enabled = true;
+      };
+      battery = {
+        chargingMode = 1;
       };
     };
   };
