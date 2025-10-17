@@ -2,6 +2,7 @@
   pkgs,
   config,
   username,
+  zen-browser,
   ...
 }: let
   # Create a Chrome wrapper with optimized flags
@@ -36,4 +37,9 @@ in {
       };
     };
   };
+
+  imports = [
+    zen-browser.homeModules.beta
+  ];
+  programs.zen-browser.enable = true;
 }
