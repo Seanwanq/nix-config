@@ -5,6 +5,26 @@
 }: {
   home.file.".config/niri/config.kdl".source = ./config.kdl;
 
+  # Environment variables for niri session
+  home.sessionVariables = {
+    # Wayland specific
+    NIXOS_OZONE_WL = "1";  # Enable Wayland support for Electron apps (VSCode, etc.)
+    MOZ_ENABLE_WAYLAND = "1";  # Firefox Wayland support
+    
+    # VSCode specific
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+    
+    # XDG settings
+    XDG_CURRENT_DESKTOP = "niri";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_SESSION_DESKTOP = "niri";
+  };
+
+  # Services needed for niri
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "pkcs11" "secrets" "ssh" ];
+  };
 
   # set cursor size and dpi for 4k monitor
   # 注释掉以避免与 sway 配置冲突

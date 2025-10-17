@@ -56,10 +56,24 @@
   };
   services.blueman.enable = true;
 
+  # UPower - 电池和电源管理 (Chrome 需要)
+  services.upower.enable = true;
+
   # 笔记本专用工具包
   environment.systemPackages = with pkgs; [
     networkmanagerapplet  # NetworkManager GUI 小程序
   ];
+
+  # GNOME Keyring - VSCode 和其他应用需要用于密钥管理
+  services.gnome.gnome-keyring.enable = true;
+
+  # Wayland 和 Electron 应用环境变量 (VSCode 等)
+  environment.sessionVariables = {
+    XDG_CURRENT_DESKTOP = "niri";
+    XDG_SESSION_TYPE = "wayland";
+    NIXOS_OZONE_WL = "1";  # 启用 Wayland 支持 (Electron 应用如 VSCode)
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

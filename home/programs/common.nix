@@ -43,6 +43,9 @@
 
     trash-cli
     just
+
+    _1password-gui
+    _1password-cli
   ];
 
   # 全局 session 变量，对所有应用生效

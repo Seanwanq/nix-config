@@ -11,3 +11,6 @@ build-vm:
 build-hv:
   sudo nixos-rebuild switch --flake .#nixos-hv --install-bootloader
 
+build-g15:
+  sudo nixos-rebuild switch --flake .#dell-g15
+
