@@ -51,6 +51,17 @@
       # to have it up-to-date or simply don't specify the nixpkgs input
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    quickshell = {
+      url = "github:outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.quickshell.follows = "quickshell";
+    };
     
   };
 
@@ -123,7 +134,74 @@
               home-manager.backupFileExtension = "backup";
 
               home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./users/${username}/home-g15.nix;
+              home-manager.users.${username} = {
+                imports = [
+                  ./users/${username}/home-g15.nix
+                  inputs.noctalia.homeModules.default
+                ];
+                
+                # Noctalia configuration
+                programs.noctalia-shell = {
+                  enable = true;
+                  
+                  settings = {
+                    bar = {
+                      position = "top";
+                      density = "default";
+                      showCapsule = true;
+                      widgets = {
+                        left = [
+                          {
+                            id = "SidePanelToggle";
+                            useDistroLogo = true;
+                          }
+                          {
+                            id = "ActiveWindow";
+                          }
+                          {
+                            id = "MediaMini";
+                          }
+                        ];
+                        center = [
+                          {
+                            id = "Workspace";
+                            hideUnoccupied = false;
+                            labelMode = "none";
+                          }
+                        ];
+                        right = [
+                          {
+                            id = "ScreenRecorder";
+                          }
+                          {
+                            id = "Tray";
+                          }
+                          {
+                            id = "NotificationHistory";
+                          }
+                          {
+                            id = "Battery";
+                            alwaysShowPercentage = true;
+                            warningThreshold = 20;
+                          }
+                          {
+                            id = "Volume";
+                          }
+                          {
+                            id = "Clock";
+                            formatHorizontal = "HH:mm";
+                            formatVertical = "HH mm";
+                            useMonospacedFont = false;
+                          }
+                          {
+                            id = "SessionMenu";
+                          }
+                        ];
+                      };
+                    };
+                  };
+                };
+              };
             }
           ];
         };

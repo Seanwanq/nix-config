@@ -136,11 +136,21 @@ output "Some Company CoolMonitor 1234" {
     // ...settings for CoolMonitor...
 }
 
+// Spawn programs at startup
+spawn-at-startup {
+    command "noctalia-shell"
+}
+
 binds {
     // Application launchers
     Mod+T { spawn "ghostty"; }
     Mod+D { spawn "rofi" "-show" "drun"; }
     Mod+Return { spawn "ghostty"; }
+    
+    // Noctalia keybindings
+    Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+    Mod+P { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    Super+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "toggle"; }
     
     // Hotkey overlay (show important niri hotkeys)
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -229,11 +239,11 @@ binds {
     Alt+Print { screenshot-window; }
     Ctrl+Print { screenshot-screen; }
     
-    // Audio controls (PipeWire)
-    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
-    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
-    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-    XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    // Audio controls (PipeWire + Noctalia)
+    XF86AudioRaiseVolume { spawn "noctalia-shell" "ipc" "call" "volume" "increase"; }
+    XF86AudioLowerVolume { spawn "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    XF86AudioMute { spawn "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    XF86AudioMicMute { spawn "noctalia-shell" "ipc" "call" "volume" "muteInput"; }
     
     // Media controls
     XF86AudioPlay { spawn "playerctl" "play-pause"; }
@@ -246,7 +256,6 @@ binds {
     XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
     
     // System
-    Super+Alt+L { spawn "swaylock"; }
     Mod+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
 }
