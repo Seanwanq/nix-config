@@ -38,6 +38,22 @@
         "Print" = "exec grim ~/截图-$(date +%Y%m%d-%H%M%S).png";
         "${modifier}+Print" = "exec grim -g \"$(slurp)\" ~/截图-$(date +%Y%m%d-%H%M%S).png";
         
+        # 音量控制 (使用 wpctl for PipeWire)
+        "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+        "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+        "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        "XF86AudioMicMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+        
+        # 媒体播放控制
+        "XF86AudioPlay" = "exec playerctl play-pause";
+        "XF86AudioPause" = "exec playerctl play-pause";
+        "XF86AudioNext" = "exec playerctl next";
+        "XF86AudioPrev" = "exec playerctl previous";
+        
+        # 亮度控制
+        "XF86MonBrightnessUp" = "exec brightnessctl set +5%";
+        "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
+        
         # 调试和分辨率设置
         "${modifier}+Shift+r" = "exec swaymsg output '*' mode 2560x1440";
         "${modifier}+Shift+o" = "exec ghostty -e sh -c 'swaymsg -t get_outputs; read'";

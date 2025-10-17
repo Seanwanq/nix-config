@@ -33,6 +33,22 @@
         "${modifier}+Ctrl+Up" = "resize shrink height 10 px or 10 ppt";
         "${modifier}+Ctrl+Right" = "resize grow width 10 px or 10 ppt";
         
+        # 音量控制 (使用 wpctl for PipeWire)
+        "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+        "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+        "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        "XF86AudioMicMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+        
+        # 媒体播放控制
+        "XF86AudioPlay" = "exec playerctl play-pause";
+        "XF86AudioPause" = "exec playerctl play-pause";
+        "XF86AudioNext" = "exec playerctl next";
+        "XF86AudioPrev" = "exec playerctl previous";
+        
+        # 亮度控制
+        "XF86MonBrightnessUp" = "exec brightnessctl set +5%";
+        "XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
+        
         # 电源管理菜单
         "${modifier}+Shift+e" = "exec ${pkgs.writeShellScript "power-menu" ''
           #!/bin/bash

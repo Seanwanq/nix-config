@@ -10,9 +10,12 @@
 
   home.packages = with pkgs; [
     # audio control
-    pavucontrol
-    playerctl
-    pulsemixer
+    pavucontrol       # PulseAudio/PipeWire volume control GUI
+    playerctl         # Media player control
+    pulsemixer        # Terminal-based mixer
+    pwvucontrol       # PipeWire volume control (modern alternative to pavucontrol)
+    helvum            # PipeWire patchbay
+    easyeffects       # Audio effects for PipeWire
     # images
     imv
   ];
@@ -29,5 +32,8 @@
 
   services = {
     playerctld.enable = true;
+    
+    # Enable EasyEffects for advanced audio control
+    easyeffects.enable = true;
   };
 }

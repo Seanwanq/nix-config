@@ -10,7 +10,7 @@
     users.users.${username} = {
         isNormalUser = true;
         description = username;
-        extraGroups = ["networkmanager" "wheel"];
+        extraGroups = ["networkmanager" "wheel" "audio" "video"];
         shell = pkgs.zsh;
     };
 
@@ -109,6 +109,19 @@
     ];
   };
 
+  # Environment variables for input method support
+  # Critical for Electron apps (1Password, VSCode, etc.) to support fcitx5
+  # Use mkForce to override fcitx5 module's default "fcitx" values
+  environment.variables = {
+    GTK_IM_MODULE = lib.mkForce "fcitx5";
+    QT_IM_MODULE = lib.mkForce "fcitx5";
+    XMODIFIERS = lib.mkForce "@im=fcitx5";
+    # Required for Wayland support in fcitx5
+    INPUT_METHOD = lib.mkForce "fcitx5";
+    # Additional environment variables for Electron apps
+    GLFW_IM_MODULE = "ibus";  # Some Electron apps need this
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -200,7 +213,9 @@
 
 
   # Enable sound with pipewire.
+  # Sound configuration - PipeWire handles both ALSA and PulseAudio
   services.pulseaudio.enable = false;
+  
   services.power-profiles-daemon = {
     enable = true;
   };
@@ -217,6 +232,9 @@
         }
     });
   '';
+  
+  # Enable realtime priority for audio processes
+  security.rtkit.enable = true;
 
   services = {
     dbus.packages = [pkgs.gcr];
@@ -234,9 +252,18 @@
       # If you want to use JACK applications, uncomment this
       jack.enable = true;
 
-      # use the example session manager (no others are packaged yet so this is enabled by default,
-      # no need to redefine it in your config for now)
-      #media-session.enable = true;
+      # WirePlumber is the recommended session manager
+      wireplumber.enable = true;
+      
+      # Low-latency configuration
+      extraConfig.pipewire."92-low-latency" = {
+        context.properties = {
+          default.clock.rate = 48000;
+          default.clock.quantum = 1024;
+          default.clock.min-quantum = 512;
+          default.clock.max-quantum = 2048;
+        };
+      };
     };
 
     udev.packages = with pkgs; [gnome-settings-daemon];
