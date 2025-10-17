@@ -10,14 +10,9 @@
     # Wayland specific
     NIXOS_OZONE_WL = "1";  # Enable Wayland support for Electron apps (VSCode, etc.)
     MOZ_ENABLE_WAYLAND = "1";  # Firefox Wayland support
-    
+
     # VSCode specific
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-    
-    # XDG settings
-    XDG_CURRENT_DESKTOP = "niri";
-    XDG_SESSION_TYPE = "wayland";
-    XDG_SESSION_DESKTOP = "niri";
   };
 
   # Services needed for niri

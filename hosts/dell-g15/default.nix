@@ -7,10 +7,11 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ../../modules/system.nix
-      # ../../modules/i3.nix      # 切换到 niri
-      ../../modules/niri.nix      # 使用 niri 窗口管理器
-      # ../../modules/sway.nix    # 可切换到 sway
+  ../../modules/system.nix
+  # ../../modules/i3.nix      # 切换到 niri
+  ../../modules/niri.nix      # 使用 niri 窗口管理器
+  ../../modules/gnome.nix     # GNOME 桌面环境
+  # ../../modules/sway.nix    # 可切换到 sway
 
       ./hardware-configuration.nix
     ];
@@ -69,9 +70,7 @@
 
   # Wayland 和 Electron 应用环境变量 (VSCode 等)
   environment.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "niri";
-    XDG_SESSION_TYPE = "wayland";
-    NIXOS_OZONE_WL = "1";  # 启用 Wayland 支持 (Electron 应用如 VSCode)
+    NIXOS_OZONE_WL = "1";          # 启用 Wayland 支持 (Electron 应用如 VSCode)
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 

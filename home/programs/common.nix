@@ -57,6 +57,8 @@
   # 全局 session 变量，对所有应用生效
   home.sessionVariables = {
     PATH = "$HOME/.local/bin:$PATH";
+    # 1Password SSH agent socket
+    SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";
   };
 
   programs = {
@@ -85,7 +87,6 @@
     btop.enable = true; # replacement of htop/nmon
     eza.enable = true; # A modern replacement for ‘ls’
     jq.enable = true; # A lightweight and flexible command-line JSON processor
-    ssh.enable = true;
     aria2.enable = true;
 
     skim = {
@@ -121,13 +122,22 @@
 
     ssh = {
       enable = true;
-      # 1Password SSH agent integration
-      extraConfig = ''
-        Host *
-            IdentityAgent ~/.1password/agent.sock
-      '';
     };
   };
+
+  # # 1Password SSH agent
+  # systemd.user.services."1password-ssh-agent" = {
+  #   Unit = {
+  #     Description = "1Password SSH agent";
+  #   };
+  #   Service = {
+  #     # The socket path is hard-coded in the 1Password app.
+  #     ExecStart = "${pkgs._1password-gui}/bin/op-ssh-agent --socket-path %h/.1password/agent.sock";
+  #   };
+  #   Install = {
+  #     WantedBy = [ "default.target" ];
+  #   };
+  # };
 
   services = {
     syncthing.enable = true;
