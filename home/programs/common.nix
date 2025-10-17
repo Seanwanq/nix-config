@@ -1,9 +1,15 @@
 {
   lib,
   pkgs,
+  nixpkgs-unstable,
   catppuccin-bat,
   ...
-}: {
+}: let
+  pkgs-unstable = import nixpkgs-unstable {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
+in {
   home.packages = with pkgs;     
   [ 
     btop # replacement of htop/nmon
@@ -54,6 +60,9 @@
     just
 
     zotero
+    
+    # Unstable packages
+    pkgs-unstable.typst
   ];
 
   # 全局 session 变量，对所有应用生效
