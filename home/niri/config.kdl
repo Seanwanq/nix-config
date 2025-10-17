@@ -249,12 +249,12 @@ binds {
     XF86AudioNext { spawn "playerctl" "next"; }
     XF86AudioPrev { spawn "playerctl" "previous"; }
     
-    // Brightness controls
-    XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
-    XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+    // Brightness controls (with minimum 5% protection)
+    XF86MonBrightnessUp { spawn "brightness-control" "up"; }
+    XF86MonBrightnessDown { spawn "brightness-control" "down"; }
     // Backup brightness controls (Mod+F6/F7)
-    Mod+F6 { spawn "brightnessctl" "set" "5%-"; }
-    Mod+F7 { spawn "brightnessctl" "set" "+5%"; }
+    Mod+F6 { spawn "brightness-control" "down"; }
+    Mod+F7 { spawn "brightness-control" "up"; }
     
     // System
     Mod+Shift+E { quit; }
