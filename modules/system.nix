@@ -74,6 +74,7 @@
         chrome
         firefox
         firefox-bin
+        zen
       '';
       mode = "0755";
     };
