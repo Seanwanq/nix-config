@@ -57,8 +57,6 @@
   # 全局 session 变量，对所有应用生效
   home.sessionVariables = {
     PATH = "$HOME/.local/bin:$PATH";
-    # 1Password SSH agent socket
-    SSH_AUTH_SOCK = "$HOME/.1password/agent.sock";
   };
 
   programs = {
@@ -120,9 +118,7 @@
       
     };
 
-    ssh = {
-      enable = true;
-    };
+
   };
 
   # # 1Password SSH agent
