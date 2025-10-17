@@ -20,9 +20,6 @@
         serverAliveInterval = 0;
         serverAliveCountMax = 3;
         hashKnownHosts = false;
-        controlMaster = "no";
-        controlPath = "~/.ssh/master-%r@%n:%p";
-        controlPersist = "no";
       };
     };
   };
@@ -30,11 +27,6 @@
   # SSH Agent service
   services.ssh-agent = {
     enable = true;
-  };
-
-  # Auto-add SSH keys on login
-  home.sessionVariables = {
-    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
   };
 
   # Shell initialization to add keys
