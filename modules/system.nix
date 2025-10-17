@@ -210,6 +210,8 @@
 
     # Battery and power management tools
     powertop
+    brightnessctl  # Screen brightness control
+    wev            # Wayland event viewer for debugging keybinds
   ];
 
   programs.zsh.enable = true;

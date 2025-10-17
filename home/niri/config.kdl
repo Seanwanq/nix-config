@@ -252,6 +252,9 @@ binds {
     // Brightness controls
     XF86MonBrightnessUp { spawn "brightnessctl" "set" "+5%"; }
     XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+    // Backup brightness controls (Mod+F6/F7)
+    Mod+F6 { spawn "brightnessctl" "set" "5%-"; }
+    Mod+F7 { spawn "brightnessctl" "set" "+5%"; }
     
     // System
     Mod+Shift+E { quit; }
