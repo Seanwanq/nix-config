@@ -98,6 +98,17 @@
     LC_TIME = "nl_NL.UTF-8";
   };
 
+  # Fcitx5 input method for Chinese Pinyin
+  i18n.inputMethod = {
+    type = "fcitx5";
+    enable = true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-gtk              # GTK integration
+      fcitx5-chinese-addons   # Chinese Pinyin input support
+      fcitx5-nord             # Nord color theme (optional)
+    ];
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

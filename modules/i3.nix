@@ -7,6 +7,8 @@
 
     desktopManager = {
       xterm.enable = false;
+      # Enable XDG autostart for fcitx5 and other applications
+      runXdgAutostartIfNone = true;
     };
 
     displayManager = {
