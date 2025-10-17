@@ -65,6 +65,20 @@
     polkitPolicyOwners = ["${username}"];
   };
 
+  # Configure 1Password to recognize custom browser wrappers for extension unlocking
+  environment.etc = {
+    "1password/custom_allowed_browsers" = {
+      text = ''
+        google-chrome
+        google-chrome-stable
+        chrome
+        firefox
+        firefox-bin
+      '';
+      mode = "0755";
+    };
+  };
+
   # Set your time zone
   time.timeZone = "Europe/Amsterdam";
 
@@ -164,6 +178,10 @@
     # VSCode 依赖
     libsecret    # 用于密钥管理
     gnome-keyring # GNOME 密钥环
+    
+    # 1Password system authentication dependencies
+    polkit_gnome  # PolKit authentication agent for GNOME
+    gcr_4         # GCR library for crypto UI components
   ];
 
   programs.zsh.enable = true;
@@ -174,7 +192,19 @@
   services.power-profiles-daemon = {
     enable = true;
   };
+  
+  # Security and authentication configuration for 1Password
   security.polkit.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  
+  # PolKit authentication agent - required for 1Password system authentication
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+        if (subject.isInGroup("wheel")) {
+            return polkit.Result.YES;
+        }
+    });
+  '';
 
   services = {
     dbus.packages = [pkgs.gcr];

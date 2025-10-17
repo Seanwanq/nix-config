@@ -11,10 +11,12 @@
       modifier = "Mod4"; # Mod4 = Super/Windows key
       
       # Sway 启动时执行的命令
-      # startup = [
-      #   # 启动后台服务
-      #   { command = "waybar"; always = true; }
-      # ];
+      startup = [
+        # PolKit authentication agent for 1Password system authentication
+        { command = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"; always = false; }
+        # 启动后台服务
+        # { command = "waybar"; always = true; }
+      ];
       
       # 基本快捷键
       keybindings = let

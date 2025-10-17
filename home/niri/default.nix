@@ -21,6 +21,23 @@
     components = [ "pkcs11" "secrets" "ssh" ];
   };
 
+  # PolKit authentication agent for 1Password system authentication
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    Unit = {
+      Description = "polkit-gnome-authentication-agent-1";
+      Wants = [ "graphical-session.target" ];
+      WantedBy = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+
   # set cursor size and dpi for 4k monitor
   # 注释掉以避免与 sway 配置冲突
   # xresources.properties = {
