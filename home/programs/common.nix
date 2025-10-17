@@ -113,6 +113,14 @@
       
     };
 
+    ssh = {
+      matchBlocks = {
+        "*" = {
+          identityAgent = "~/.1password/agent.sock";
+        };
+      };
+    };
+
   };
 
   services = {
