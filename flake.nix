@@ -117,7 +117,7 @@
 
       dell-g15 = let
         username = "sean";
-        specialArgs = {inherit username;};
+        specialArgs = {inherit username inputs;};
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
@@ -139,68 +139,6 @@
                   ./users/${username}/home-g15.nix
                   inputs.noctalia.homeModules.default
                 ];
-                
-                # Noctalia configuration
-                programs.noctalia-shell = {
-                  enable = true;
-                  
-                  settings = {
-                    bar = {
-                      position = "top";
-                      density = "default";
-                      showCapsule = true;
-                      widgets = {
-                        left = [
-                          {
-                            id = "SidePanelToggle";
-                            useDistroLogo = true;
-                          }
-                          {
-                            id = "ActiveWindow";
-                          }
-                          {
-                            id = "MediaMini";
-                          }
-                        ];
-                        center = [
-                          {
-                            id = "Workspace";
-                            hideUnoccupied = false;
-                            labelMode = "none";
-                          }
-                        ];
-                        right = [
-                          {
-                            id = "ScreenRecorder";
-                          }
-                          {
-                            id = "Tray";
-                          }
-                          {
-                            id = "NotificationHistory";
-                          }
-                          {
-                            id = "Battery";
-                            alwaysShowPercentage = true;
-                            warningThreshold = 20;
-                          }
-                          {
-                            id = "Volume";
-                          }
-                          {
-                            id = "Clock";
-                            formatHorizontal = "HH:mm";
-                            formatVertical = "HH mm";
-                            useMonospacedFont = false;
-                          }
-                          {
-                            id = "SessionMenu";
-                          }
-                        ];
-                      };
-                    };
-                  };
-                };
               };
             }
           ];

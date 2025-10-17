@@ -137,9 +137,7 @@ output "Some Company CoolMonitor 1234" {
 }
 
 // Spawn programs at startup
-spawn-at-startup {
-    command "noctalia-shell"
-}
+spawn-at-startup "noctalia-shell"
 
 binds {
     // Application launchers

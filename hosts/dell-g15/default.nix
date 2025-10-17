@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running 'nixos-help').
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -63,6 +63,7 @@
   # 笔记本专用工具包
   environment.systemPackages = with pkgs; [
     networkmanagerapplet  # NetworkManager GUI 小程序
+    inputs.noctalia.packages.${pkgs.system}.default  # Noctalia shell
   ];
 
   # GNOME Keyring - VSCode 和其他应用需要用于密钥管理

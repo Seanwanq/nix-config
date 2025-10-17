@@ -8,5 +8,6 @@
     ./xdg.nix
     ./vscode.nix
     ./yazi.nix
+    ./noctalia.nix
   ];
 }
