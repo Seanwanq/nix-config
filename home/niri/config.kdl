@@ -101,7 +101,7 @@ input {
 output "eDP-1" {
     // off
     mode "2560x1440@120.030"
-    scale 2.0
+    scale 1.5
     // transform "90"  // Removed: This was rotating the screen 90 degrees
     position x=1280 y=0
     variable-refresh-rate // on-demand=true
