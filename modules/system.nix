@@ -207,6 +207,9 @@
     # 1Password system authentication dependencies
     polkit_gnome  # PolKit authentication agent for GNOME
     gcr_4         # GCR library for crypto UI components
+
+    # Battery and power management tools
+    powertop
   ];
 
   programs.zsh.enable = true;
