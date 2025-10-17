@@ -9,7 +9,7 @@
       "github.com" = {
         hostname = "github.com";
         user = "git";
-        identityFile = "~/.ssh/GitHub 2025";
+        identityFile = "\"~/.ssh/GitHub 2025\"";
         identitiesOnly = true;
       };
     };
