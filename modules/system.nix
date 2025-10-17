@@ -249,19 +249,41 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      # If you want to use JACK applications, uncomment this
       jack.enable = true;
 
       # WirePlumber is the recommended session manager
       wireplumber.enable = true;
       
-      # Low-latency configuration
-      extraConfig.pipewire."92-low-latency" = {
+      # High-quality audio configuration
+      extraConfig.pipewire."92-high-quality" = {
         context.properties = {
+          # 高采样率以获得更好的音质
           default.clock.rate = 48000;
-          default.clock.quantum = 1024;
-          default.clock.min-quantum = 512;
-          default.clock.max-quantum = 2048;
+          default.clock.allowed-rates = [ 44100 48000 88200 96000 ];
+          
+          # 降低延迟，提高响应性
+          default.clock.quantum = 256;
+          default.clock.min-quantum = 256;
+          default.clock.max-quantum = 512;
+        };
+      };
+      
+      # ALSA 高质量配置
+      extraConfig.pipewire-pulse."92-pulse-high-quality" = {
+        context.modules = [
+          {
+            name = "libpipewire-module-protocol-pulse";
+            args = {
+              pulse.min.req = "256/48000";
+              pulse.default.req = "256/48000";
+              pulse.max.req = "256/48000";
+              pulse.min.quantum = "256/48000";
+              pulse.max.quantum = "256/48000";
+            };
+          }
+        ];
+        stream.properties = {
+          resample.quality = 10;  # 最高重采样质量 (0-10, 默认4)
         };
       };
     };
