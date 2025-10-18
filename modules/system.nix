@@ -131,10 +131,10 @@
 
   # Environment variables for input method support
   # Critical for Electron apps (1Password, VSCode, etc.) to support fcitx5
-  # Use mkForce to override fcitx5 module's default "fcitx" values
+  # Use mkForce to override fcitx5 module's default values
   environment.variables = {
-    # GTK_IM_MODULE should NOT be set in Wayland, use Wayland input method frontend instead
-    # GTK_IM_MODULE = lib.mkForce "fcitx5";  # Only needed for X11
+    # Unset GTK_IM_MODULE for Wayland - use Wayland input method frontend instead
+    GTK_IM_MODULE = lib.mkForce "";  # Empty string to unset
     QT_IM_MODULE = lib.mkForce "fcitx5";
     XMODIFIERS = lib.mkForce "@im=fcitx5";
     # Required for Wayland support in fcitx5
