@@ -16,6 +16,7 @@
     ../../home/programs
     ../../home/rofi
     ../../home/shell
+    ../../home/rclone
   ];
 
   programs.git = {
