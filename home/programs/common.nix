@@ -65,6 +65,8 @@ in {
     pkgs-unstable.typst
 
     cliphist
+    
+    libreoffice-qt6-fresh
   ];
 
   # 全局 session 变量，对所有应用生效
