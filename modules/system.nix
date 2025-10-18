@@ -53,6 +53,26 @@
   # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
   nix.settings.auto-optimise-store = true;
 
+  # Systemd 配置 - 减少关机时的等待时间
+  systemd = {
+    # 减少用户服务停止的超时时间
+    user.extraConfig = ''
+      DefaultTimeoutStopSec=10s
+    '';
+    
+    # 系统级别的超时配置
+    extraConfig = ''
+      DefaultTimeoutStopSec=10s
+      DefaultTimeoutStartSec=10s
+    '';
+    
+    # 针对特定服务的超时配置
+    services = {
+      # NetworkManager-wait-online 可能导致启动延迟
+      NetworkManager-wait-online.enable = false;
+    };
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -113,7 +133,8 @@
   # Critical for Electron apps (1Password, VSCode, etc.) to support fcitx5
   # Use mkForce to override fcitx5 module's default "fcitx" values
   environment.variables = {
-    GTK_IM_MODULE = lib.mkForce "fcitx5";
+    # GTK_IM_MODULE should NOT be set in Wayland, use Wayland input method frontend instead
+    # GTK_IM_MODULE = lib.mkForce "fcitx5";  # Only needed for X11
     QT_IM_MODULE = lib.mkForce "fcitx5";
     XMODIFIERS = lib.mkForce "@im=fcitx5";
     # Required for Wayland support in fcitx5
