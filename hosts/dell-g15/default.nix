@@ -60,6 +60,18 @@
   # UPower - 电池和电源管理 (Chrome 需要)
   services.upower.enable = true;
 
+  # 显卡配置 - Intel Iris Xe + NVIDIA RTX 3060 Mobile
+  # 启用 Intel 硬件加速和 VA-API 支持
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver  # LIBVA_DRIVER_NAME=iHD (现代 Intel GPU，Iris Xe)
+      vaapiIntel          # LIBVA_DRIVER_NAME=i965 (旧 Intel GPU)
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+  };
+
   # 笔记本专用工具包
   environment.systemPackages = with pkgs; [
     networkmanagerapplet  # NetworkManager GUI 小程序
