@@ -141,6 +141,8 @@
     INPUT_METHOD = lib.mkForce "fcitx5";
     # Additional environment variables for Electron apps
     GLFW_IM_MODULE = "ibus";  # Some Electron apps need this
+    # 强制 Electron 应用使用 Wayland IME
+    ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
 
   # Enable CUPS to print documents.

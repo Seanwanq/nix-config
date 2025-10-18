@@ -8,7 +8,7 @@
   imports = [
     ../../home/core.nix
 
-    # ../../home/fcitx5
+    ../../home/fcitx5     # 启用 fcitx5 输入法配置
     # ../../home/i3        # 在 Hyper-V 中不使用 i3
     ../../home/niri        # 启用 niri
     ../../home/nvim
