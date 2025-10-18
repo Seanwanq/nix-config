@@ -102,8 +102,7 @@
         enabled = true;
       };
       battery = {
-        chargingMode = 1;
-        chargeThreshold = 80;
+        chargingMode = 2;
       };
     };
   };
