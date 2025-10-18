@@ -15,6 +15,7 @@
     
     # Basic settings for Noctalia
     settings = {
+      setupCompleted = true;  # Disable tutor on startup
       bar = {
         position = "top";
         density = "default";
@@ -76,6 +77,9 @@
         };
       };
       general = {};
+      appLauncher = {
+        enableClipboardHistory = true;
+      };
       location = {
         name = "Utrecht, The Netherlands";
         monthBeforeDay = true;
@@ -91,7 +95,7 @@
         gtk = true;
         qt = true;
         kcolorscheme = true;
-        ghostty = true;
+        # ghostty = true;
         enableUserTemplates = true;
       };
       nightLight = {
@@ -99,6 +103,7 @@
       };
       battery = {
         chargingMode = 1;
+        chargeThreshold = 80;
       };
     };
   };
