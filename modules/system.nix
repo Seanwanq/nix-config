@@ -222,27 +222,133 @@
     # user defined fonts
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
     # B&W emojis that would sometimes show instead of some Color emojis
-    fontconfig.defaultFonts = {
-      serif = [
-        "Noto Serif"
-        "Noto Serif CJK SC"
-        "Source Han Serif SC"
-        "Noto Color Emoji"
-      ];
-      sansSerif = [
-        "Noto Sans"
-        "Noto Sans CJK SC"
-        "Source Han Sans SC"
-        "WenQuanYi Micro Hei"
-        "Noto Color Emoji"
-      ];
-      monospace = [
-        "JetBrainsMono Nerd Font"
-        "Noto Sans Mono CJK SC"
-        "WenQuanYi Zen Hei Mono"
-        "Noto Color Emoji"
-      ];
-      emoji = [ "Noto Color Emoji" ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = [
+          "Noto Serif"
+          "Noto Serif CJK SC"
+          "Source Han Serif SC"
+          "Noto Color Emoji"
+        ];
+        sansSerif = [
+          "Noto Sans"
+          "Noto Sans CJK SC"
+          "Source Han Sans SC"
+          "WenQuanYi Micro Hei"
+          "Noto Color Emoji"
+        ];
+        monospace = [
+          "JetBrainsMono Nerd Font"
+          "Noto Sans Mono CJK SC"
+          "WenQuanYi Zen Hei Mono"
+          "Noto Color Emoji"
+        ];
+        emoji = [ "Noto Color Emoji" ];
+      };
+
+      # 针对 WebView 和浏览器的额外配置
+      localConf = ''
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+        <fontconfig>
+          <!-- 设置默认字体替换规则 -->
+          <alias>
+            <family>sans-serif</family>
+            <prefer>
+              <family>Noto Sans</family>
+              <family>Noto Sans CJK SC</family>
+              <family>Source Han Sans SC</family>
+              <family>WenQuanYi Micro Hei</family>
+            </prefer>
+          </alias>
+          
+          <alias>
+            <family>serif</family>
+            <prefer>
+              <family>Noto Serif</family>
+              <family>Noto Serif CJK SC</family>
+              <family>Source Han Serif SC</family>
+            </prefer>
+          </alias>
+          
+          <alias>
+            <family>monospace</family>
+            <prefer>
+              <family>JetBrainsMono Nerd Font</family>
+              <family>Noto Sans Mono CJK SC</family>
+              <family>WenQuanYi Zen Hei Mono</family>
+            </prefer>
+          </alias>
+
+          <!-- 常见 WebView 和浏览器字体别名 -->
+          <match target="pattern">
+            <test qual="any" name="family">
+              <string>Arial</string>
+            </test>
+            <edit name="family" mode="assign" binding="same">
+              <string>Noto Sans</string>
+              <string>Noto Sans CJK SC</string>
+            </edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family">
+              <string>Helvetica</string>
+            </test>
+            <edit name="family" mode="assign" binding="same">
+              <string>Noto Sans</string>
+              <string>Noto Sans CJK SC</string>
+            </edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family">
+              <string>Verdana</string>
+            </test>
+            <edit name="family" mode="assign" binding="same">
+              <string>Noto Sans</string>
+              <string>Noto Sans CJK SC</string>
+            </edit>
+          </match>
+
+          <match target="pattern">
+            <test qual="any" name="family">
+              <string>Tahoma</string>
+            </test>
+            <edit name="family" mode="assign" binding="same">
+              <string>Noto Sans</string>
+              <string>Noto Sans CJK SC</string>
+            </edit>
+          </match>
+
+          <!-- 启用嵌入位图 -->
+          <match target="font">
+            <edit name="embeddedbitmap" mode="assign">
+              <bool>true</bool>
+            </edit>
+          </match>
+
+          <!-- 字体渲染优化 -->
+          <match target="font">
+            <edit name="antialias" mode="assign">
+              <bool>true</bool>
+            </edit>
+            <edit name="hinting" mode="assign">
+              <bool>true</bool>
+            </edit>
+            <edit name="hintstyle" mode="assign">
+              <const>hintslight</const>
+            </edit>
+            <edit name="rgba" mode="assign">
+              <const>rgb</const>
+            </edit>
+            <edit name="lcdfilter" mode="assign">
+              <const>lcddefault</const>
+            </edit>
+          </match>
+        </fontconfig>
+      '';
     };
   };
 
