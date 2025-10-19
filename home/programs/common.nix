@@ -67,6 +67,8 @@ in {
     cliphist
     
     libreoffice-qt6-fresh
+
+    papers
   ];
 
   # 全局 session 变量，对所有应用生效
