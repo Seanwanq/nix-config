@@ -387,6 +387,7 @@
     gnumake
     cmake
     gcc14
+    gdb
 
     # VSCode 依赖
     libsecret # 用于密钥管理

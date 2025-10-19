@@ -60,6 +60,7 @@ in
     ruff
     uv
     llvmPackages_21.libcxxClang
+    lldb_21
     rustup
 
     trash-cli
