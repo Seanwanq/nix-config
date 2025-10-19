@@ -247,6 +247,7 @@
     powertop
     brightnessctl  # Screen brightness control
     wev            # Wayland event viewer for debugging keybinds
+    nixfmt-rfc-style
   ];
 
   programs.zsh.enable = true;
