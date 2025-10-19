@@ -4,29 +4,28 @@
   nixpkgs-unstable,
   catppuccin-bat,
   ...
-}: let
+}:
+let
   pkgs-unstable = import nixpkgs-unstable {
     system = pkgs.system;
     config.allowUnfree = true;
   };
-  
+
   # WeMeet wrapper with fixed locale for JSON parsing
   wemeet-fixed = pkgs.writeShellScriptBin "wemeet" ''
     # Force C locale for numeric values to fix JSON parsing
     export LC_NUMERIC=C
     exec ${pkgs.wemeet}/bin/wemeet "$@"
   '';
-in {
-  home.packages = with pkgs;     
-  [ 
+in
+{
+  home.packages = with pkgs; [
     btop # replacement of htop/nmon
     eza # A modern replacement for 'ls'
     jq # A lightweight and flexible command-line JSON processor
-    
 
-    
     aria2
-    
+
     # archives
     zip
     unzip
@@ -67,18 +66,20 @@ in {
     just
 
     zotero
-    
+
     # Unstable packages
     pkgs-unstable.typst
 
     cliphist
-    
+
     libreoffice-qt6-fresh
 
     papers
 
     zoom-us
-    wemeet-fixed  # Use wrapper with fixed locale
+    wemeet-fixed # Use wrapper with fixed locale
+
+    eudic
   ];
 
   # 全局 session 变量，对所有应用生效
@@ -135,16 +136,15 @@ in {
         theme = "robbyrussell";
       };
       autosuggestion = {
-          enable = true;
-          highlight = "fg=#8080c6,bold,underline";
+        enable = true;
+        highlight = "fg=#8080c6,bold,underline";
       };
       autocd = true;
       sessionVariables = {
         PATH = "$HOME/.local/bin:$PATH";
       };
-      
-    };
 
+    };
 
   };
 
