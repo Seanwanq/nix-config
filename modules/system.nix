@@ -148,6 +148,18 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Flatpak support for installing applications from Flathub
+  services.flatpak.enable = true;
+  
+  # Automatically add Flathub repository
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
   # 设置控制台字体大小(用于启动画面和 TTY)
   console = {
     font = "ter-v32n";  # Terminus 字体,32 像素高度

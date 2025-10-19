@@ -67,7 +67,7 @@
     extraPackages = with pkgs; [
       intel-media-driver  # LIBVA_DRIVER_NAME=iHD (现代 Intel GPU，Iris Xe)
       intel-media-sdk     # Intel Media SDK (QuickSync 硬件编码支持)
-      onevpl-intel-gpu    # OneVPL runtime for Intel GPU (现代 QuickSync API)
+      vpl-gpu-rt    # OneVPL runtime for Intel GPU (现代 QuickSync API)
       vaapiIntel          # LIBVA_DRIVER_NAME=i965 (旧 Intel GPU)
       vaapiVdpau
       libvdpau-va-gl

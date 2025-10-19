@@ -14,6 +14,12 @@
     # the Home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "25.05";
+    
+    # Environment variables for Flatpak integration
+    # Required for Flatpak apps to appear in application launchers
+    sessionVariables = {
+      XDG_DATA_DIRS = "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
+    };
   };
 
   # Let Home Manager install and manage itself.
