@@ -60,7 +60,7 @@ in
     ruff
     uv
     llvmPackages_21.libcxxClang
-    lldb_21
+    # lldb_21
     rustup
 
     trash-cli
@@ -81,6 +81,8 @@ in
     wemeet-fixed # Use wrapper with fixed locale
 
     eudic
+
+    smartgit
   ];
 
   # 全局 session 变量，对所有应用生效
