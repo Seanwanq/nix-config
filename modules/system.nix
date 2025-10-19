@@ -1,28 +1,37 @@
 {
-    pkgs,
-    lib,
-    username,
-    ...
-}: {
-    # User related
+  pkgs,
+  lib,
+  username,
+  ...
+}:
+{
+  # User related
 
-    # Define a user account. Don't forget to set a password with 'passwd'
-    users.users.${username} = {
-        isNormalUser = true;
-        description = username;
-        extraGroups = ["networkmanager" "wheel" "audio" "video"];
-        shell = pkgs.zsh;
-    };
+  # Define a user account. Don't forget to set a password with 'passwd'
+  users.users.${username} = {
+    isNormalUser = true;
+    description = username;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "video"
+    ];
+    shell = pkgs.zsh;
+  };
 
-    # given the users in this list the right to specify additional substituters via:
-    #    1. `nixConfig.substituers` in `flake.nix`
-    #    2. command line args `--options substituers http://xxx`
-    nix.settings.trusted-users = [username];
+  # given the users in this list the right to specify additional substituters via:
+  #    1. `nixConfig.substituers` in `flake.nix`
+  #    2. command line args `--options substituers http://xxx`
+  nix.settings.trusted-users = [ username ];
 
-    # customise /etc/nix/nix.conf declaratively via `nix.settings`
-    nix.settings = {
+  # customise /etc/nix/nix.conf declaratively via `nix.settings`
+  nix.settings = {
     # enable flakes globally
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     substituters = [
       # cache mirror located in China
@@ -59,13 +68,13 @@
     user.extraConfig = ''
       DefaultTimeoutStopSec=10s
     '';
-    
+
     # 系统级别的超时配置
     extraConfig = ''
       DefaultTimeoutStopSec=10s
       DefaultTimeoutStartSec=10s
     '';
-    
+
     # 针对特定服务的超时配置
     services = {
       # NetworkManager-wait-online 可能导致启动延迟
@@ -76,13 +85,29 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Enable support for dynamically linked executables (for Python, Node.js, etc.)
+  # This allows running executables installed via pip, npm, cargo, etc.
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add common libraries that dynamic executables might need
+    stdenv.cc.cc.lib
+    zlib
+    fftw
+    ncurses
+    openssl
+    curl
+    expat
+    libxml2
+    libiconv
+  ];
+
   # 1Password configuration
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
     # Certain features, including CLI integration and system authentication support,
     # require enabling PolKit integration on some desktop environments (e.g. Plasma).
-    polkitPolicyOwners = ["${username}"];
+    polkitPolicyOwners = [ "${username}" ];
   };
 
   # Configure 1Password to recognize custom browser wrappers for extension unlocking
@@ -123,9 +148,9 @@
     type = "fcitx5";
     enable = true;
     fcitx5.addons = with pkgs; [
-      fcitx5-gtk              # GTK integration
-      fcitx5-chinese-addons   # Chinese Pinyin input support
-      fcitx5-nord             # Nord color theme (optional)
+      fcitx5-gtk # GTK integration
+      fcitx5-chinese-addons # Chinese Pinyin input support
+      fcitx5-nord # Nord color theme (optional)
     ];
   };
 
@@ -134,13 +159,13 @@
   # Use mkForce to override fcitx5 module's default values
   environment.variables = {
     # Unset GTK_IM_MODULE for Wayland - use Wayland input method frontend instead
-    GTK_IM_MODULE = lib.mkForce "";  # Empty string to unset
+    GTK_IM_MODULE = lib.mkForce ""; # Empty string to unset
     QT_IM_MODULE = lib.mkForce "fcitx5";
     XMODIFIERS = lib.mkForce "@im=fcitx5";
     # Required for Wayland support in fcitx5
     INPUT_METHOD = lib.mkForce "fcitx5";
     # Additional environment variables for Electron apps
-    GLFW_IM_MODULE = "ibus";  # Some Electron apps need this
+    GLFW_IM_MODULE = "ibus"; # Some Electron apps need this
     # 强制 Electron 应用使用 Wayland IME
     ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   };
@@ -150,7 +175,7 @@
 
   # Flatpak support for installing applications from Flathub
   services.flatpak.enable = true;
-  
+
   # Automatically add Flathub repository
   systemd.services.flatpak-repo = {
     wantedBy = [ "multi-user.target" ];
@@ -162,9 +187,9 @@
 
   # 设置控制台字体大小(用于启动画面和 TTY)
   console = {
-    font = "ter-v32n";  # Terminus 字体,32 像素高度
+    font = "ter-v32n"; # Terminus 字体,32 像素高度
     packages = [ pkgs.terminus_font ];
-    earlySetup = true;  # 尽早应用字体设置
+    earlySetup = true; # 尽早应用字体设置
   };
 
   fonts = {
@@ -191,10 +216,19 @@
     # the reason there's Noto Color Emoji everywhere is to override DejaVu's
     # B&W emojis that would sometimes show instead of some Color emojis
     fontconfig.defaultFonts = {
-      serif = ["Noto Serif" "Noto Color Emoji"];
-      sansSerif = ["Noto Sans" "Noto Color Emoji"];
-      monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-      emoji = ["Noto Color Emoji"];
+      serif = [
+        "Noto Serif"
+        "Noto Color Emoji"
+      ];
+      sansSerif = [
+        "Noto Sans"
+        "Noto Color Emoji"
+      ];
+      monospace = [
+        "JetBrainsMono Nerd Font"
+        "Noto Color Emoji"
+      ];
+      emoji = [ "Noto Color Emoji" ];
     };
   };
 
@@ -216,7 +250,6 @@
     openFirewall = true;
   };
 
-
   # List packages installed在系统级别
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -234,37 +267,36 @@
     gnumake
     cmake
     gcc14
-    
+
     # VSCode 依赖
-    libsecret    # 用于密钥管理
+    libsecret # 用于密钥管理
     gnome-keyring # GNOME 密钥环
-    
+
     # 1Password system authentication dependencies
-    polkit_gnome  # PolKit authentication agent for GNOME
-    gcr_4         # GCR library for crypto UI components
+    polkit_gnome # PolKit authentication agent for GNOME
+    gcr_4 # GCR library for crypto UI components
 
     # Battery and power management tools
     powertop
-    brightnessctl  # Screen brightness control
-    wev            # Wayland event viewer for debugging keybinds
+    brightnessctl # Screen brightness control
+    wev # Wayland event viewer for debugging keybinds
     nixfmt-rfc-style
   ];
 
   programs.zsh.enable = true;
 
-
   # Enable sound with pipewire.
   # Sound configuration - PipeWire handles both ALSA and PulseAudio
   services.pulseaudio.enable = false;
-  
+
   services.power-profiles-daemon = {
     enable = true;
   };
-  
+
   # Security and authentication configuration for 1Password
   security.polkit.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
-  
+
   # PolKit authentication agent - required for 1Password system authentication
   security.polkit.extraConfig = ''
     polkit.addRule(function(action, subject) {
@@ -273,15 +305,15 @@
         }
     });
   '';
-  
+
   # Enable realtime priority for audio processes
   security.rtkit.enable = true;
 
   services = {
-    dbus.packages = [pkgs.gcr];
+    dbus.packages = [ pkgs.gcr ];
 
     geoclue2.enable = true;
-    
+
     # GNOME Keyring - VSCode 需要用于密码管理
     gnome.gnome-keyring.enable = true;
 
@@ -294,21 +326,26 @@
 
       # WirePlumber is the recommended session manager
       wireplumber.enable = true;
-      
+
       # High-quality audio configuration
       extraConfig.pipewire."92-high-quality" = {
         context.properties = {
           # 高采样率以获得更好的音质
           default.clock.rate = 48000;
-          default.clock.allowed-rates = [ 44100 48000 88200 96000 ];
-          
+          default.clock.allowed-rates = [
+            44100
+            48000
+            88200
+            96000
+          ];
+
           # 降低延迟，提高响应性
           default.clock.quantum = 256;
           default.clock.min-quantum = 256;
           default.clock.max-quantum = 512;
         };
       };
-      
+
       # ALSA 高质量配置
       extraConfig.pipewire-pulse."92-pulse-high-quality" = {
         context.modules = [
@@ -324,12 +361,12 @@
           }
         ];
         stream.properties = {
-          resample.quality = 10;  # 最高重采样质量 (0-10, 默认4)
+          resample.quality = 10; # 最高重采样质量 (0-10, 默认4)
         };
       };
     };
 
-    udev.packages = with pkgs; [gnome-settings-daemon];
+    udev.packages = with pkgs; [ gnome-settings-daemon ];
   };
 
 }
