@@ -3,11 +3,12 @@
 
   # niri wayland packages
   environment.systemPackages = with pkgs; [
-    swaylock     # screen locker
-    swayidle     # idle management daemon
-    grim         # screenshot tool
-    slurp        # region selector for screenshots
-    wl-clipboard # clipboard utilities
+    swaylock            # screen locker
+    swayidle            # idle management daemon
+    grim                # screenshot tool
+    slurp               # region selector for screenshots
+    wl-clipboard        # clipboard utilities
+    xwayland-satellite  # XWayland integration for niri
   ];
 
   # XDG Desktop Portal - 必须用于 Chrome 等应用的文件选择器和屏幕共享

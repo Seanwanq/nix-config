@@ -9,6 +9,13 @@
     system = pkgs.system;
     config.allowUnfree = true;
   };
+  
+  # WeMeet wrapper with fixed locale for JSON parsing
+  wemeet-fixed = pkgs.writeShellScriptBin "wemeet" ''
+    # Force C locale for numeric values to fix JSON parsing
+    export LC_NUMERIC=C
+    exec ${pkgs.wemeet}/bin/wemeet "$@"
+  '';
 in {
   home.packages = with pkgs;     
   [ 
@@ -71,7 +78,7 @@ in {
     papers
 
     zoom-us
-    wemeet
+    wemeet-fixed  # Use wrapper with fixed locale
   ];
 
   # 全局 session 变量，对所有应用生效
