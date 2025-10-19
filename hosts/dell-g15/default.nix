@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
   ../../modules/system.nix
   ../../modules/power-management.nix  # 笔记本电源管理
+  ../../modules/tpm-luks.nix          # TPM 2.0 自动解锁 LUKS
   # ../../modules/i3.nix      # 切换到 niri
   ../../modules/niri.nix      # 使用 niri 窗口管理器
   ../../modules/gnome.nix     # GNOME 桌面环境
