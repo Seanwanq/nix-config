@@ -56,16 +56,90 @@ ls -la /dev/tpm*
 sudo tpm2_getcap properties-fixed
 ```
 
-### 4. 注册 LUKS 密钥到 TPM
+### 4. 查找您的 LUKS 设备 UUID
 
-找到您的 LUKS 加密设备名称（从 hardware-configuration.nix 中获取）：
+每台电脑的 LUKS 设备 UUID 都不同。有以下几种方法查找：
+
+#### 🚀 快速方法：使用辅助脚本（推荐）
 
 ```bash
-# 您的 LUKS 设备名称
-LUKS_NAME="luks-52846d5d-f14e-4e5f-a167-fe1ff015b9ca"
+# 运行查找脚本
+./find-luks-uuid.sh
+```
+
+这个脚本会自动使用多种方法查找您的 LUKS UUID，并给出可以直接使用的命令。
+
+#### 方法 1：从 hardware-configuration.nix 查找
+
+```bash
+# 查看硬件配置文件
+cat /etc/nixos/hardware-configuration.nix | grep luks
+```
+
+您会看到类似这样的输出：
+```nix
+boot.initrd.luks.devices."luks-52846d5d-f14e-4e5f-a167-fe1ff015b9ca".device = "/dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca";
+```
+
+其中 `52846d5d-f14e-4e5f-a167-fe1ff015b9ca` 就是您的 LUKS UUID。
+
+#### 方法 2：使用 lsblk 命令
+
+```bash
+# 查看所有块设备
+lsblk -f
+```
+
+输出示例：
+```
+NAME        FSTYPE      LABEL UUID                                 MOUNTPOINT
+nvme0n1                                                             
+├─nvme0n1p1 vfat              E623-8214                            /boot
+└─nvme0n1p2 crypto_LUKS       52846d5d-f14e-4e5f-a167-fe1ff015b9ca 
+  └─luks... ext4              1ff0b5ba-18e1-43db-8616-ea0b25e00867 /
+```
+
+找到 `FSTYPE` 为 `crypto_LUKS` 的行，其 UUID 就是 LUKS 设备的 UUID。
+
+#### 方法 3：使用 blkid 命令
+
+```bash
+# 查看所有块设备的详细信息（需要 root 权限）
+sudo blkid | grep crypto_LUKS
+```
+
+输出示例：
+```
+/dev/nvme0n1p2: UUID="52846d5d-f14e-4e5f-a167-fe1ff015b9ca" TYPE="crypto_LUKS"
+```
+
+#### 方法 4：查看当前解锁的 LUKS 设备
+
+```bash
+# 查看 /dev/mapper 中的设备
+ls -la /dev/mapper/
+
+# 查看 cryptsetup 状态
+sudo cryptsetup status /dev/mapper/luks-*
+```
+
+### 5. 注册 LUKS 密钥到 TPM
+
+使用上面找到的 UUID，将密码注册到 TPM：
+
+```bash
+# 替换下面的 UUID 为您自己的 UUID
+LUKS_UUID="52846d5d-f14e-4e5f-a167-fe1ff015b9ca"
 
 # 将现有密码注册到 TPM
-sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca
+sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/disk/by-uuid/$LUKS_UUID
+```
+
+**更简单的方法** - 直接使用设备路径：
+
+```bash
+# 如果您知道加密分区在哪里（通常是 nvme0n1p2 或 sda2）
+sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/nvme0n1p2
 ```
 
 **执行过程**:
@@ -78,16 +152,39 @@ sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/disk/by-uuid/52
 - `PCR 7`: 安全启动状态
 - 使用这两个 PCR 确保系统未被篡改时才能解锁
 
-### 5. 验证 TPM 密钥已注册
+### 6. 验证 TPM 密钥已注册
 
 ```bash
-# 查看 LUKS 设备的密钥槽
-sudo cryptsetup luksDump /dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca | grep -A 5 "systemd-tpm2"
+# 替换为您的 UUID 或直接使用设备路径
+sudo cryptsetup luksDump /dev/disk/by-uuid/您的UUID | grep -A 5 "systemd-tpm2"
+
+# 或者使用设备路径
+sudo cryptsetup luksDump /dev/nvme0n1p2 | grep -A 5 "systemd-tpm2"
 ```
 
 您应该看到一个使用 systemd-tpm2 的密钥槽。
 
-### 6. 测试自动解锁
+**完整查看所有密钥槽**：
+
+```bash
+sudo cryptsetup luksDump /dev/nvme0n1p2
+```
+
+输出示例：
+```
+LUKS header information
+Version:        2
+...
+Keyslots:
+  0: luks2
+      Key:        512 bits
+      ...
+  1: systemd-tpm2
+      Key:        512 bits
+      ...
+```
+
+### 7. 测试自动解锁
 
 重启系统：
 
@@ -154,11 +251,11 @@ sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/disk/by-uuid/52
 如果您想禁用 TPM 自动解锁，恢复到手动输入密码：
 
 ```bash
-# 列出所有密钥槽
-sudo cryptsetup luksDump /dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca
+# 列出所有密钥槽（使用您的 UUID 或设备路径）
+sudo cryptsetup luksDump /dev/nvme0n1p2
 
 # 移除 TPM 密钥槽（例如槽位 1）
-sudo systemd-cryptenroll /dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca --wipe-slot=1
+sudo systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=1
 ```
 
 **⚠️ 警告**: 不要移除您的原始密码槽！至少保留一个密码槽作为备份。
@@ -168,8 +265,8 @@ sudo systemd-cryptenroll /dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca 
 您可以保留多个密码槽：
 
 ```bash
-# 添加新密码
-sudo cryptsetup luksAddKey /dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca
+# 添加新密码（使用您的设备路径）
+sudo cryptsetup luksAddKey /dev/nvme0n1p2
 ```
 
 这样您可以有：
@@ -206,17 +303,17 @@ systemd-cryptenroll --help | grep tpm2
 
 1. 手动输入 LUKS 密码启动系统
 2. 移除旧的 TPM 密钥
-3. 重新注册新的 TPM 密钥（步骤 4）
+3. 重新注册新的 TPM 密钥
 
 ```bash
-# 列出密钥槽
-sudo cryptsetup luksDump /dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca
+# 列出密钥槽（使用您的设备路径）
+sudo cryptsetup luksDump /dev/nvme0n1p2
 
 # 移除旧的 TPM 槽（假设是槽位 1）
-sudo systemd-cryptenroll /dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca --wipe-slot=1
+sudo systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=1
 
 # 重新注册
-sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/disk/by-uuid/52846d5d-f14e-4e5f-a167-fe1ff015b9ca
+sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/nvme0n1p2
 ```
 
 ### 仍然提示输入密码
