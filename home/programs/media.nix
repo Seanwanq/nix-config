@@ -27,8 +27,16 @@
       scripts = [pkgs.mpvScripts.mpris];
     };
 
-    obs-studio.enable = false;
+    obs-studio = {
+      enable = true;
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs  # Wayland/wlroots screen capture for OBS
+        obs-pipewire-audio-capture  # PipeWire audio capture
+        obs-vaapi  # Intel VAAPI hardware encoding support
+      ];
+    };
   };
+
 
   services = {
     playerctld.enable = true;

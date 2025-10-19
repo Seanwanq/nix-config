@@ -149,6 +149,9 @@ binds {
     Mod+D { spawn "rofi" "-show" "drun"; }
     Mod+Return { spawn "ghostty"; }
     
+    // Screen recording with OBS Studio
+    Mod+Shift+O{ spawn "obs"; }
+    
     // Noctalia keybindings
     Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Mod+P { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }

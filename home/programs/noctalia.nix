@@ -42,9 +42,6 @@
           ];
           right = [
             {
-              id = "ScreenRecorder";
-            }
-            {
               id = "Tray";
             }
             {
