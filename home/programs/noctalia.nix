@@ -3,7 +3,8 @@
   config,
   inputs,
   ...
-}: {
+}:
+{
   # Install quickshell package
   home.packages = [
     inputs.quickshell.packages.${pkgs.system}.default
@@ -12,10 +13,10 @@
   # Noctalia shell configuration
   programs.noctalia-shell = {
     enable = true;
-    
+
     # Basic settings for Noctalia
     settings = {
-      setupCompleted = true;  # Disable tutor on startup
+      setupCompleted = true; # Disable tutor on startup
       bar = {
         position = "top";
         density = "default";
@@ -73,7 +74,7 @@
           ];
         };
       };
-      general = {};
+      general = { };
       appLauncher = {
         enableClipboardHistory = true;
       };
@@ -81,12 +82,18 @@
         name = "Utrecht, The Netherlands";
         monthBeforeDay = true;
       };
+      wallpaper = {
+        enabled = true;
+        directory = "/home/sean/Pictures/wallpaper";
+        defaultWallpaper = "/home/sean/Pictures/wallpaper/bird.jpg";
+
+      };
       notifications = {
         alwaysOnTop = true;
       };
       colorSchemes = {
         predefinedScheme = "Dracula";
-        darkMode = true;
+        darkMode = false;
       };
       templates = {
         gtk = true;
