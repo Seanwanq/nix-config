@@ -200,7 +200,14 @@
       # normal fonts
       noto-fonts
       noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
       noto-fonts-emoji
+
+      # 中文字体
+      source-han-sans
+      source-han-serif
+      wqy_microhei
+      wqy_zenhei
 
       # nerdfonts
       # https://github.com/NixOS/nixpkgs/blob/nixos-unstable-small/pkgs/data/fonts/nerd-fonts/manifests/fonts.json
@@ -218,14 +225,21 @@
     fontconfig.defaultFonts = {
       serif = [
         "Noto Serif"
+        "Noto Serif CJK SC"
+        "Source Han Serif SC"
         "Noto Color Emoji"
       ];
       sansSerif = [
         "Noto Sans"
+        "Noto Sans CJK SC"
+        "Source Han Sans SC"
+        "WenQuanYi Micro Hei"
         "Noto Color Emoji"
       ];
       monospace = [
         "JetBrainsMono Nerd Font"
+        "Noto Sans Mono CJK SC"
+        "WenQuanYi Zen Hei Mono"
         "Noto Color Emoji"
       ];
       emoji = [ "Noto Color Emoji" ];
