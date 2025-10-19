@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
   ../../modules/system.nix
+  ../../modules/power-management.nix  # 笔记本电源管理
   # ../../modules/i3.nix      # 切换到 niri
   ../../modules/niri.nix      # 使用 niri 窗口管理器
   ../../modules/gnome.nix     # GNOME 桌面环境
@@ -35,18 +36,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # 笔记本电源管理
-  services.power-profiles-daemon.enable = true;
-  
-  # 或者使用 TLP（更高级的电源管理，与 power-profiles-daemon 二选一）
-  # services.tlp = {
-  #   enable = true;
-  #   settings = {
-  #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
-  #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-  #   };
-  # };
-
   # 背光控制
   programs.light.enable = true;
 
@@ -56,9 +45,6 @@
     powerOnBoot = true;
   };
   services.blueman.enable = true;
-
-  # UPower - 电池和电源管理 (Chrome 需要)
-  services.upower.enable = true;
 
   # 显卡配置 - Intel Iris Xe + NVIDIA RTX 3060 Mobile
   # 启用 Intel 硬件加速和 VA-API 支持

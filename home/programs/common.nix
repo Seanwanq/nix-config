@@ -69,6 +69,9 @@ in {
     libreoffice-qt6-fresh
 
     papers
+
+    zoom-us
+    wemeet
   ];
 
   # 全局 session 变量，对所有应用生效

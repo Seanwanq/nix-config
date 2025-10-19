@@ -99,6 +99,8 @@
         enabled = true;
       };
       battery = {
+        # 充电模式: 0 = Disabled, 1 = Full (100%), 2 = Balanced (80%), 3 = Lifespan (60%)
+        # 设置为 2 (Balanced) 保护电池，充到 80% 停止
         chargingMode = 2;
       };
     };
