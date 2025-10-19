@@ -74,7 +74,9 @@
           ];
         };
       };
-      general = { };
+      general = {
+        avatarImage = "/home/sean/Pictures/Avatar/my-notion-face-transparent.png";
+      };
       appLauncher = {
         enableClipboardHistory = true;
       };
