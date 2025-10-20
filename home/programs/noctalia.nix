@@ -94,7 +94,7 @@
         alwaysOnTop = true;
       };
       colorSchemes = {
-        predefinedScheme = "Dracula";
+        predefinedScheme = "Nord";
         darkMode = false;
       };
       templates = {
