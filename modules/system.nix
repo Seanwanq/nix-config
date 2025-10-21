@@ -382,7 +382,7 @@
     # print screen key is also bound to this tool in i3 config
     scrot
     fastfetch
-    xfce.thunar # xfce4's file manager
+    # xfce.thunar # xfce4's file manager
     wl-clipboard # Wayland 剪贴板工具(用于 VirtualBox 剪贴板共享)
     gnumake
     cmake

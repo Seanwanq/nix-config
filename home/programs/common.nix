@@ -73,16 +73,14 @@ in
 
     cliphist
 
-    libreoffice-qt6-fresh
-
     papers
 
     zoom-us
     wemeet-fixed # Use wrapper with fixed locale
 
-    eudic
-
     smartgit
+
+    pkgs-unstable.zed-editor
   ];
 
   # 全局 session 变量，对所有应用生效
@@ -91,26 +89,26 @@ in
   };
 
   programs = {
-    tmux = {
-      enable = true;
-      clock24 = true;
-      keyMode = "vi";
-      extraConfig = "mouse on";
-    };
+    # tmux = {
+    #   enable = true;
+    #   clock24 = true;
+    #   keyMode = "vi";
+    #   extraConfig = "mouse on";
+    # };
 
     bat = {
       enable = true;
       config = {
         pager = "less -FR";
-        theme = "catppuccin-mocha";
+        # theme = "catppuccin-mocha";
       };
-      themes = {
-        # https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-mocha.tmTheme
-        catppuccin-mocha = {
-          src = catppuccin-bat;
-          file = "Catppuccin-mocha.tmTheme";
-        };
-      };
+      # themes = {
+      #   # https://raw.githubusercontent.com/catppuccin/bat/main/Catppuccin-mocha.tmTheme
+      #   catppuccin-mocha = {
+      #     src = catppuccin-bat;
+      #     file = "Catppuccin-mocha.tmTheme";
+      #   };
+      # };
     };
 
     btop.enable = true; # replacement of htop/nmon
