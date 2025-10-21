@@ -81,6 +81,9 @@ in
     smartgit
 
     pkgs-unstable.zed-editor
+
+    jdk24
+    pkgs-unstable.dotnet-sdk_10
   ];
 
   # 全局 session 变量，对所有应用生效
