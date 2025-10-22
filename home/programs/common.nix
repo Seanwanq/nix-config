@@ -75,20 +75,20 @@ in
 
     papers
 
-    zoom-us
-    wemeet-fixed # Use wrapper with fixed locale
-
     smartgit
 
-    pkgs-unstable.zed-editor
+    # pkgs-unstable.zed-editor
 
     jdk24
-    pkgs-unstable.dotnet-sdk_10
+    # dotnet-sdk_9
+    # pkgs-unstable.gccNGPackages_15.libstdcxx
   ];
 
   # 全局 session 变量，对所有应用生效
   home.sessionVariables = {
     PATH = "$HOME/.local/bin:$PATH";
+    LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libgcc}/lib";
+    # DOTNET_ROOT = "${pkgs.dotnet-sdk_9}/share/dotnet";
   };
 
   programs = {

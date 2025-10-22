@@ -99,6 +99,8 @@
     expat
     libxml2
     libiconv
+    libgcc
+    glibc
   ];
 
   # 1Password configuration
@@ -388,6 +390,8 @@
     cmake
     gcc14
     gdb
+    libgcc
+    ninja
 
     # VSCode 依赖
     libsecret # 用于密钥管理
