@@ -1,11 +1,21 @@
 {
+  pkgs,
   yazi-dracula,
   yazi-plugins,
+  nixpkgs-unstable,
   ...
-}: {
+}: 
+let
+  pkgs-unstable = import nixpkgs-unstable {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
+in
+{
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
+    package = pkgs-unstable.yazi;
     
     # yazi.toml 配置
     settings = {

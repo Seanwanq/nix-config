@@ -46,7 +46,7 @@ in
 
     stylua
     ruff
-    # uv  # 会导致包冲突，使用 python3 代替
+    uv
     # llvmPackages_21.libcxxClang  # 与 gcc14 冲突，建议使用 gcc
     # lldb_21
     rustup
@@ -59,6 +59,8 @@ in
 
     jdk24
     pkgs-unstable.zig
+
+    nasm
   ];
 
   # 全局 session 变量，对所有应用生效
