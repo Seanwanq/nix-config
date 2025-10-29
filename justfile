@@ -17,6 +17,10 @@ check-g15:
 build-wsl:
   nix shell github:nix-community/home-manager/release-25.05#home-manager -c home-manager switch --flake .#sean@wsl
 
+build-wsl-fresh:
+  mkdir -p ~/.config/nix && echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
+  nix shell github:nix-community/home-manager/release-25.05#home-manager -c home-manager switch --flake .#sean@wsl
+
 # 检查 Home Manager 配置（不应用）
 check-wsl:
   nix shell github:nix-community/home-manager/release-25.05#home-manager -c home-manager build --flake .#sean@wsl
