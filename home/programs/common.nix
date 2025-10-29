@@ -82,13 +82,14 @@ in
     jdk24
     # dotnet-sdk_9
     # pkgs-unstable.gccNGPackages_15.libstdcxx
+    zig
   ];
 
   # 全局 session 变量，对所有应用生效
   home.sessionVariables = {
-    PATH = "$HOME/.local/bin:$PATH";
+    PATH = "$DOTNET_ROOT:$DOTNET_ROOT/tools:$HOME/.local/bin:$PATH";
     LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libgcc}/lib";
-    # DOTNET_ROOT = "${pkgs.dotnet-sdk_9}/share/dotnet";
+    DOTNET_ROOT = "$HOME/.dotnet";
   };
 
   programs = {

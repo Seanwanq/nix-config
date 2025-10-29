@@ -157,7 +157,7 @@ binds {
     // Noctalia keybindings
     Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Mod+P { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
-    Super+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "toggle"; }
+    Super+Alt+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
     
     // Hotkey overlay (show important niri hotkeys)
     Mod+Shift+Slash { show-hotkey-overlay; }

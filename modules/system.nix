@@ -101,6 +101,7 @@
     libiconv
     libgcc
     glibc
+    icu
   ];
 
   # 1Password configuration
@@ -406,6 +407,8 @@
     brightnessctl # Screen brightness control
     wev # Wayland event viewer for debugging keybinds
     nixfmt-rfc-style
+
+    icu
   ];
 
   programs.zsh.enable = true;
