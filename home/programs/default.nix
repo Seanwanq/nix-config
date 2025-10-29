@@ -9,5 +9,7 @@
     ./vscode.nix
     ./yazi.nix
     ./noctalia.nix
+    ./helix.nix
+    ./zed.nix
   ];
 }
