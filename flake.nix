@@ -68,53 +68,6 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
     nixosConfigurations = {
 
-      nixos-vm = let
-        username = "sean";
-        specialArgs = {inherit username;};
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/nixos-vm
-            ./users/${username}/nixos.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./users/${username}/home.nix;
-            }
-          ];
-        };
-
-      nixos-hv = let
-        username = "sean";
-        specialArgs = {inherit username;};
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-
-          modules = [
-            ./hosts/nixos-hv
-            ./users/${username}/nixos.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = import ./users/${username}/home-hv.nix;  # 使用 Hyper-V 专用配置
-            }
-          ];
-        };
-
       dell-g15 = let
         username = "sean";
         specialArgs = {inherit username inputs;};
@@ -143,6 +96,50 @@
             }
           ];
         };
+
+      wsl = let
+        username = "sean";
+        specialArgs = {inherit username inputs;};
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+
+          modules = [
+            ./hosts/wsl
+            ./users/${username}/nixos.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+
+              home-manager.extraSpecialArgs = inputs // specialArgs;
+              home-manager.users.${username} = {
+                imports = [
+                  ./users/${username}/home-wsl.nix
+                  inputs.noctalia.homeModules.default
+                ];
+              };
+            }
+          ];
+        };
+    };
+
+    # ========================================================================
+    # Home Manager 独立配置（用于非 NixOS 系统如 WSL）
+    # ========================================================================
+    homeConfigurations = {
+      "sean@wsl" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = inputs // { username = "sean"; };
+
+        modules = [
+          ./users/sean/home-wsl.nix
+          inputs.noctalia.homeModules.default
+        ];
+      };
     };
   };
 }
