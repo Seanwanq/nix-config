@@ -58,6 +58,9 @@ in
     pkgs-unstable.typst
 
     jdk24
+    pkgs-unstable.gradle_9
+    pkgs-unstable.kotlin
+
     pkgs-unstable.zig
 
     nasm
