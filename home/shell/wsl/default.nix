@@ -28,6 +28,8 @@ in
   home.shellAliases = {
     f = "fastfetch";
     z = "eza";
+    ssh = "ssh.exe";
+    ssh-add = "ssh-add.exe";
   };
 
   home.packages = with pkgs; [
