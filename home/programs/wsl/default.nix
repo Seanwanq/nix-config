@@ -5,6 +5,7 @@
     ./ssh.nix
     ../yazi.nix
     ../helix.nix
+    ../zellij.nix
   ];
 }
 

@@ -11,5 +11,6 @@
     ./noctalia.nix
     ./helix.nix
     ./zed.nix
+    ./zellij.nix
   ];
 }
