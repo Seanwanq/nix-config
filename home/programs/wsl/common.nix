@@ -64,6 +64,8 @@ in
     pkgs-unstable.zig
 
     nasm
+
+    pkgs-unstable.julia
   ];
 
   # 全局 session 变量，对所有应用生效

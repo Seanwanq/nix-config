@@ -82,7 +82,9 @@ in
     jdk24
     # dotnet-sdk_9
     # pkgs-unstable.gccNGPackages_15.libstdcxx
-    zig
+    pkgs-unstable.zig
+
+    pkgs-unstable.julia
   ];
 
   # 全局 session 变量，对所有应用生效

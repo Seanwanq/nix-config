@@ -7,7 +7,7 @@ let
 in
 {
   programs.zellij = {
-    enable = true;
+    enable = false;
     package = pkgs-unstable.zellij;
     enableZshIntegration = true;
   };
