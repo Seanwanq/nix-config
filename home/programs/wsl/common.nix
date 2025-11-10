@@ -3,6 +3,7 @@
   pkgs,
   nixpkgs-unstable,
   catppuccin-bat,
+  inputs,
   ...
 }:
 let
@@ -53,6 +54,9 @@ in
 
     trash-cli
     just
+
+    # GitHub flake packages
+    inputs.tuios.packages.${pkgs.system}.tuios
 
     # Unstable packages
     pkgs-unstable.typst

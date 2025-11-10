@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   imports = [
     ./common.nix

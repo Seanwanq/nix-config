@@ -62,6 +62,11 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.quickshell.follows = "quickshell";
     };
+
+    tuios = {
+      url = "github:Gaurav-Gosain/tuios";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     
   };
 
@@ -133,7 +138,15 @@
     homeConfigurations = {
       "sean@wsl" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = inputs // { username = "sean"; };
+        extraSpecialArgs = {
+          inherit inputs;
+          username = "sean";
+          nixpkgs-unstable = inputs.nixpkgs-unstable;
+          catppuccin-bat = inputs.catppuccin-bat;
+          yazi-dracula = inputs.yazi-dracula;
+          yazi-plugins = inputs.yazi-plugins;
+          nvim-config = inputs.nvim-config;
+        };
 
         modules = [
           ./users/sean/home-wsl.nix
