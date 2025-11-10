@@ -73,6 +73,7 @@ in
     PATH = "$DOTNET_ROOT:$DOTNET_ROOT/tools:$HOME/.local/bin:$PATH";
     LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libgcc}/lib";
     DOTNET_ROOT = "$HOME/.dotnet";
+    JAVA_HOME = "${pkgs.jdk24}";
   };
 
   programs = {
