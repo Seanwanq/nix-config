@@ -13,7 +13,7 @@
     # You can update Home Manager without changing this value. See
     # the Home Manager release notes for a list of state version
     # changes in each release.
-    stateVersion = "25.05";
+    stateVersion = "25.11";
     
     # Environment variables for Flatpak integration
     # Required for Flatpak apps to appear in application launchers

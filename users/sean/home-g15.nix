@@ -21,8 +21,10 @@
   ];
 
   programs.git = {
-    userName = "Seanwanq";
-    userEmail = "seanwang313@outlook.com";
+    settings.user = {
+      email = "seanwang313@outlook.com";
+      name = "Seanwanq";
+    };
   };
 
   home.activation.dotnet = config.lib.dag.entryAfter [ "writeBoundary" ] ''

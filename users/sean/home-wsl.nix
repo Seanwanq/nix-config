@@ -24,8 +24,10 @@
   };
 
   programs.git = {
-    userName = "Seanwanq";
-    userEmail = "seanwang313@outlook.com";
+    settings.user = {
+      email = "seanwang313@outlook.com";
+      name = "Seanwanq";
+    };
   };
 
   # ============================================================================
@@ -48,6 +50,6 @@
   # Home Manager 设置
   # ============================================================================
 
-  home.stateVersion = "25.05"; # 与 NixOS 版本一致
+  home.stateVersion = "25.11"; # 与 NixOS 版本一致
 }
 

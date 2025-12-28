@@ -79,12 +79,14 @@ in
 
     # pkgs-unstable.zed-editor
 
-    jdk24
+    jdk21_headless
     # dotnet-sdk_9
     # pkgs-unstable.gccNGPackages_15.libstdcxx
     pkgs-unstable.zig
 
     pkgs-unstable.julia
+
+    flang_21
   ];
 
   # 全局 session 变量，对所有应用生效
@@ -92,7 +94,7 @@ in
     PATH = "$DOTNET_ROOT:$DOTNET_ROOT/tools:$HOME/.local/bin:$PATH";
     LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libgcc}/lib";
     DOTNET_ROOT = "$HOME/.dotnet";
-    JAVA_HOME = "${pkgs.jdk24}";
+    JAVA_HOME = "${pkgs.jdk21_headless}";
   };
 
   programs = {

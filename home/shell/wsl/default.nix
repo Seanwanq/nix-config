@@ -63,7 +63,7 @@ in
       highlight = "fg=#8080c6,bold,underline";
     };
     autocd = true;
-    dotDir = ".config/zsh";
+    # dotDir = "`\${config.xdg.configHome}/zsh`";
     initContent = ''
       # 额外的 zsh 配置
       export PATH="$HOME/.local/bin:$PATH"

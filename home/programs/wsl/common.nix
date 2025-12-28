@@ -22,7 +22,7 @@ in
     fastfetch # 系统信息显示
     gnumake # Make 工具
     cmake # 编译系统
-    gcc14 # C/C++ 编译器
+    (lib.hiPrio gcc15)
     gdb # 调试器
     libgcc # GCC 运行库
     ninja # 构建系统
@@ -56,12 +56,11 @@ in
     just
 
     # GitHub flake packages
-    inputs.tuios.packages.${pkgs.system}.tuios
 
     # Unstable packages
     pkgs-unstable.typst
 
-    jdk24
+    jdk21_headless
     pkgs-unstable.gradle_8
     pkgs-unstable.kotlin
 
@@ -70,6 +69,9 @@ in
     nasm
 
     pkgs-unstable.julia
+
+    (lib.lowPrio gfortran15)
+    flang_21
   ];
 
   # 全局 session 变量，对所有应用生效
@@ -77,7 +79,7 @@ in
     PATH = "$DOTNET_ROOT:$DOTNET_ROOT/tools:$HOME/.local/bin:$PATH";
     LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libgcc}/lib";
     DOTNET_ROOT = "$HOME/.dotnet";
-    JAVA_HOME = "${pkgs.jdk24}";
+    JAVA_HOME = "${pkgs.jdk21_headless}";
   };
 
   programs = {
