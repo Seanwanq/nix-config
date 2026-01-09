@@ -68,18 +68,25 @@ in
 
     nasm
 
-    pkgs-unstable.julia
+    # using juliaup from vscode instead.
+    # pkgs-unstable.julia
 
-    (lib.lowPrio gfortran15)
+    # (lib.lowPrio gfortran15)
     flang_21
   ];
 
   # 全局 session 变量，对所有应用生效
   home.sessionVariables = {
-    PATH = "$DOTNET_ROOT:$DOTNET_ROOT/tools:$HOME/.local/bin:$PATH";
+    PATH = "$HOME/.juliaup/bin:$DOTNET_ROOT:$DOTNET_ROOT/tools:$HOME/.local/bin:$PATH";
     LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libgcc}/lib";
     DOTNET_ROOT = "$HOME/.dotnet";
     JAVA_HOME = "${pkgs.jdk21_headless}";
+
+    FC = "nvfortran";
+    F77 = "nvfortran";
+    F90 = "nvfortran";
+    CC = "nvc";
+    CXX = "nvc++";
   };
 
   programs = {
@@ -118,27 +125,6 @@ in
         "--preview 'exa --icons --git --color always -T -L 3 {} | head -200'"
         "--exact"
       ];
-    };
-
-    zsh = {
-      enable = true;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [
-          "git"
-          "sudo"
-        ];
-        theme = "robbyrussell";
-      };
-      autosuggestion = {
-        enable = true;
-        highlight = "fg=#8080c6,bold,underline";
-      };
-      autocd = true;
-      sessionVariables = {
-        PATH = "$HOME/.local/bin:$PATH";
-      };
-
     };
 
   };

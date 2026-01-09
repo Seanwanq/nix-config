@@ -54,7 +54,6 @@ in
       plugins = [
         "git"
         "sudo"
-        "docker"
       ];
       theme = "robbyrussell";
     };

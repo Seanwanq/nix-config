@@ -39,7 +39,7 @@
     DOTNET_FILE="$HOME/dotnet-x64.tar.gz"
     if [ ! -d "$DOTNET_ROOT" ]; then
       echo "Downloading dotnet SDK..."
-      ${pkgs.curl}/bin/curl -L -o "$DOTNET_FILE" "https://builds.dotnet.microsoft.com/dotnet/Sdk/9.0.306/dotnet-sdk-9.0.306-linux-x64.tar.gz"
+      ${pkgs.curl}/bin/curl -L -o "$DOTNET_FILE" "https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.101/dotnet-sdk-10.0.101-linux-x64.tar.gz"
       mkdir -p "$DOTNET_ROOT"
       PATH="${pkgs.gzip}/bin:$PATH" ${pkgs.gnutar}/bin/tar zxf "$DOTNET_FILE" -C "$DOTNET_ROOT"
       rm -f "$DOTNET_FILE"
