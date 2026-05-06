@@ -25,6 +25,16 @@ build-wsl-fresh:
 check-wsl:
   nix shell github:nix-community/home-manager/release-25.11#home-manager -c home-manager build --flake .#sean@wsl
 
+# 应用 MacBook Pro 的 nix-darwin 配置。
+# 首次运行前请先执行 bootstrap：
+# nix run github:nix-community/nix-darwin -- switch --flake .#Siyuans-MacBook-Pro
+build-mbp:
+  darwin-rebuild switch --flake .#Siyuans-MacBook-Pro
+
+# 检查 MacBook Pro 配置（不应用）
+check-mbp:
+  darwin-rebuild build --flake .#Siyuans-MacBook-Pro
+
 # 清理 Nix 存储（释放空间）
 gc:
   nix-collect-garbage -d

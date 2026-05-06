@@ -63,9 +63,14 @@
       inputs.quickshell.follows = "quickshell";
     };
 
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin/nix-darwin-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, nix-darwin, ... }: {
     nixosConfigurations = {
 
       dell-g15 = let
@@ -148,7 +153,37 @@
           inputs.noctalia.homeModules.default
         ];
       };
+
     };
+
+    # ========================================================================
+    # nix-darwin 配置（MacBook Pro）
+    # ========================================================================
+    darwinConfigurations."Siyuans-MacBook-Pro" = let
+      username = "siyuan";
+      specialArgs = { inherit inputs username; };
+    in
+      nix-darwin.lib.darwinSystem {
+        inherit specialArgs;
+
+        modules = [
+          ./hosts/macbook
+
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+
+            home-manager.extraSpecialArgs = specialArgs // {
+              nvim-config = inputs.nvim-config;
+            };
+            home-manager.users.${username} = {
+              imports = [ ./users/siyuan/home-mbp.nix ];
+            };
+          }
+        ];
+      };
   };
 }
 
