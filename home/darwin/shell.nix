@@ -6,6 +6,9 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      shellAliases = {
+        vpn-work = "sudo openconnect --user=siyuan.wang --authgroup=NDS-AnyConnect vpn.nds.global";
+      };
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "sudo" ];

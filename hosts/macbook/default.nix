@@ -34,6 +34,14 @@
     };
     casks = [
       "fork"
+      "ghostty"
+      "visual-studio-code"
+      "microsoft-edge"
+      "clash-verge-rev"
+      "utm"
+      "microsoft-teams"
+      "google-drive"
+      "steam"
     ];
   };
 
@@ -41,7 +49,7 @@
   # macOS 系统设置
   # ============================================================================
   system.defaults = {
-    dock.autohide = true;
+    dock.autohide = false;
     finder = {
       AppleShowAllExtensions = true;
       FXPreferredViewStyle = "clmv"; # Column view

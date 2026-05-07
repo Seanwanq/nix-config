@@ -29,7 +29,7 @@ check-wsl:
 # 首次运行前请先执行 bootstrap：
 # nix run github:nix-community/nix-darwin -- switch --flake .#Siyuans-MacBook-Pro
 build-mbp:
-  darwin-rebuild switch --flake .#Siyuans-MacBook-Pro
+  sudo darwin-rebuild switch --flake .#Siyuans-MacBook-Pro
 
 # 检查 MacBook Pro 配置（不应用）
 check-mbp:
