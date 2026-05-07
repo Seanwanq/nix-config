@@ -1,4 +1,10 @@
 { pkgs, username, ... }:
+let
+  brewNoApiWrapper = pkgs.writeShellScriptBin "brew" ''
+    export HOMEBREW_NO_INSTALL_FROM_API=1
+    exec /opt/homebrew/bin/brew "$@"
+  '';
+in
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -27,8 +33,13 @@
   # ============================================================================
   homebrew = {
     enable = true;
+    # nix-darwin runs brew bundle via sudo with a restricted environment.
+    # Use a wrapper so this workaround always applies during activation.
+    brewPrefix = "${brewNoApiWrapper}/bin";
     onActivation = {
-      autoUpdate = true;
+      # Keep activation deterministic and avoid long waits during rebuild.
+      autoUpdate = false;
+      upgrade = true;
       # "uninstall" 会移除不在列表中的 cask，但不删除用户数据
       cleanup = "uninstall";
     };
@@ -42,6 +53,9 @@
       "microsoft-teams"
       "google-drive"
       "steam"
+      "mos"
+      "dotnet-sdk"
+      "cursor"
     ];
   };
 
@@ -56,6 +70,8 @@
     };
     NSGlobalDomain = {
       AppleInterfaceStyle = "Dark";
+      # 关闭长按弹重音菜单，让 hjkl 等按键可持续重复输入
+      ApplePressAndHoldEnabled = false;
       KeyRepeat = 2;
       InitialKeyRepeat = 15;
     };

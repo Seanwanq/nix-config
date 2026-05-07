@@ -24,6 +24,16 @@
 
     rustup
     fastfetch
+
+    uv
+    pixi
+    bun
+    fnm
+    cmake
+
+    helix
+    emacs
+
   ];
 
   programs = {

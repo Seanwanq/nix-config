@@ -29,11 +29,12 @@ check-wsl:
 # 首次运行前请先执行 bootstrap：
 # nix run github:nix-community/nix-darwin -- switch --flake .#Siyuans-MacBook-Pro
 build-mbp:
-  sudo darwin-rebuild switch --flake .#Siyuans-MacBook-Pro
+  # Work around current Homebrew cask API regression during darwin activation.
+  sudo env HOMEBREW_NO_INSTALL_FROM_API=1 darwin-rebuild switch --flake .#Siyuans-MacBook-Pro --no-write-lock-file
 
 # 检查 MacBook Pro 配置（不应用）
 check-mbp:
-  darwin-rebuild build --flake .#Siyuans-MacBook-Pro
+  darwin-rebuild build --flake .#Siyuans-MacBook-Pro --no-write-lock-file
 
 # 清理 Nix 存储（释放空间）
 gc:
