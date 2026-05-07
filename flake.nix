@@ -176,6 +176,7 @@
             home-manager.backupFileExtension = "backup";
 
             home-manager.extraSpecialArgs = specialArgs // {
+              nixpkgs-unstable = inputs.nixpkgs-unstable;
               nvim-config = inputs.nvim-config;
             };
             home-manager.users.${username} = {

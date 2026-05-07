@@ -1,4 +1,10 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, nixpkgs-unstable, ... }:
+let
+  pkgs-unstable = import nixpkgs-unstable {
+    system = pkgs.system;
+    config.allowUnfree = true;
+  };
+in
 {
   home.packages = with pkgs; [
     # 基础工具
@@ -31,8 +37,13 @@
     fnm
     cmake
 
+    pkgs-unstable.typst
+
     helix
     emacs
+    pkgs-unstable.dbeaver-bin
+    pkgs-unstable.bruno
+    pkgs-unstable.zotero
 
   ];
 
