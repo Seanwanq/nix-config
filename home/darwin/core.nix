@@ -12,5 +12,11 @@
     };
   };
 
+  targets.darwin = {
+    # Use symlink-based app exposure to avoid App Management permission prompts.
+    copyApps.enable = false;
+    linkApps.enable = true;
+  };
+
   programs.home-manager.enable = true;
 }

@@ -36,6 +36,7 @@ in
     bun
     fnm
     cmake
+    ninja
 
     pkgs-unstable.typst
 
@@ -43,7 +44,21 @@ in
     emacs
     pkgs-unstable.dbeaver-bin
     pkgs-unstable.bruno
-    pkgs-unstable.zotero
+    localsend
+    pkgs-unstable.code-cursor
+    pkgs-unstable.cursor-cli
+    pkgs-unstable.mos
+    pkgs-unstable.dotnet-sdk_10
+    pkgs-unstable.dioxus-cli
+    pkgs-unstable.lldb
+    (lib.hiPrio pkgs-unstable.rust-analyzer)
+
+    wrangler
+
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.meslo-lg
+
+  xcodes
 
   ];
 

@@ -33,6 +33,10 @@ in
   # ============================================================================
   homebrew = {
     enable = true;
+    taps = [
+      "homebrew/core"
+      "homebrew/cask"
+    ];
     # nix-darwin runs brew bundle via sudo with a restricted environment.
     # Use a wrapper so this workaround always applies during activation.
     brewPrefix = "${brewNoApiWrapper}/bin";
@@ -40,22 +44,26 @@ in
       # Keep activation deterministic and avoid long waits during rebuild.
       autoUpdate = false;
       upgrade = true;
-      # "uninstall" 会移除不在列表中的 cask，但不删除用户数据
-      cleanup = "uninstall";
+      # "zap" 会在移除不在列表中的 cask 时尽可能清理用户数据（含部分 Containers）。
+      cleanup = "zap";
     };
+    brews = [
+      "mole"
+      "clang-format"
+    ];
     casks = [
       "fork"
-      "ghostty"
-      "visual-studio-code"
       "microsoft-edge"
       "clash-verge-rev"
-      "utm"
       "microsoft-teams"
       "google-drive"
+      "zotero"
       "steam"
-      "mos"
-      "dotnet-sdk"
-      "cursor"
+      "nutstore"
+      "visual-studio-code"
+      "grandperspective"
+      "obsidian"
+      "eudic"
     ];
   };
 
@@ -74,7 +82,7 @@ in
       FXPreferredViewStyle = "clmv"; # Column view
     };
     NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
+      # AppleInterfaceStyle = "Dark";
       # 关闭长按弹重音菜单，让 hjkl 等按键可持续重复输入
       ApplePressAndHoldEnabled = false;
       KeyRepeat = 2;

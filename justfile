@@ -29,6 +29,7 @@ check-wsl:
 # 首次运行前请先执行 bootstrap：
 # nix run github:nix-community/nix-darwin -- switch --flake .#Siyuans-MacBook-Pro
 build-mbp:
+  HOMEBREW_NO_AUTO_UPDATE=1 brew tap homebrew/cask
   # Work around current Homebrew cask API regression during darwin activation.
   sudo env HOMEBREW_NO_INSTALL_FROM_API=1 darwin-rebuild switch --flake .#Siyuans-MacBook-Pro --no-write-lock-file
 
