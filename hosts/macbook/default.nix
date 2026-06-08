@@ -39,7 +39,7 @@ in
     ];
     # nix-darwin runs brew bundle via sudo with a restricted environment.
     # Use a wrapper so this workaround always applies during activation.
-    brewPrefix = "${brewNoApiWrapper}/bin";
+    prefix = "${brewNoApiWrapper}";
     onActivation = {
       # Keep activation deterministic and avoid long waits during rebuild.
       autoUpdate = false;
@@ -50,6 +50,11 @@ in
     brews = [
       "mole"
       "clang-format"
+      "juliaup"
+      "gperftools"
+      "google-benchmark"
+      "cloudflare-wrangler"
+      "graphviz"
     ];
     casks = [
       "fork"

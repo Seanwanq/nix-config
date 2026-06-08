@@ -53,12 +53,12 @@ in
     pkgs-unstable.lldb
     (lib.hiPrio pkgs-unstable.rust-analyzer)
 
-    wrangler
-
     nerd-fonts.jetbrains-mono
     nerd-fonts.meslo-lg
 
-  xcodes
+    xcodes
+
+    pkgs-unstable.pprof
 
   ];
 

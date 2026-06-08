@@ -15,15 +15,15 @@ check-g15:
 
 # 更新 WSL 用户配置
 build-wsl:
-  nix shell github:nix-community/home-manager/release-25.11#home-manager -c home-manager switch --flake .#sean@wsl
+  nix shell github:nix-community/home-manager/release-26.05#home-manager -c home-manager switch --flake .#sean@wsl
 
 build-wsl-fresh:
   mkdir -p ~/.config/nix && echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
-  nix shell github:nix-community/home-manager/release-25.11#home-manager -c home-manager switch --flake .#sean@wsl
+  nix shell github:nix-community/home-manager/release-26.05#home-manager -c home-manager switch --flake .#sean@wsl
 
 # 检查 Home Manager 配置（不应用）
 check-wsl:
-  nix shell github:nix-community/home-manager/release-25.11#home-manager -c home-manager build --flake .#sean@wsl
+  nix shell github:nix-community/home-manager/release-26.05#home-manager -c home-manager build --flake .#sean@wsl
 
 # 应用 MacBook Pro 的 nix-darwin 配置。
 # 首次运行前请先执行 bootstrap：

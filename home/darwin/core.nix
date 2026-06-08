@@ -3,7 +3,7 @@
   home = {
     username = "siyuan";
     homeDirectory = "/Users/siyuan";
-    stateVersion = "25.11";
+    stateVersion = "26.05";
 
     sessionVariables = {
       EDITOR = "nvim";

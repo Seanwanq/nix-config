@@ -8,7 +8,7 @@
 
 应用 Mac 的 Home Manager 配置：
 
-`nix shell github:nix-community/home-manager/release-25.11#home-manager -c home-manager switch --flake .#siyuan@mbp`
+`nix shell github:nix-community/home-manager/release-26.05#home-manager -c home-manager switch --flake .#siyuan@mbp`
 
 也可以用 `just`：
 
