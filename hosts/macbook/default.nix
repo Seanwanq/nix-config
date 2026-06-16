@@ -69,6 +69,7 @@ in
       "visual-studio-code"
       "grandperspective"
       "obsidian"
+      "ollama-app"
       "eudic"
     ];
   };
