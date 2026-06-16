@@ -55,6 +55,7 @@ in
       "google-benchmark"
       "cloudflare-wrangler"
       "graphviz"
+      "qwen-code"
     ];
     casks = [
       "fork"
