@@ -43,7 +43,6 @@ in
     helix
     emacs
     pkgs-unstable.dbeaver-bin
-    pkgs-unstable.bruno
     localsend
     pkgs-unstable.code-cursor
     pkgs-unstable.cursor-cli

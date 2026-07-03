@@ -83,8 +83,11 @@ in
         theme = "robbyrussell";
       };
       sessionVariables = {
-        PATH = "$HOME/.cargo/bin:$HOME/.local/bin:$PATH";
+        PATH = "/opt/homebrew/opt/llvm/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH";
         LIBRARY_PATH = "/opt/homebrew/lib:$LIBRARY_PATH";
+        CPATH = "/opt/homebrew/include:$CPATH";
+        CMAKE_INCLUDE_PATH = "/opt/homebrew/include:$CMAKE_INCLUDE_PATH";
+        CMAKE_LIBRARY_PATH = "/opt/homebrew/lib:$CMAKE_LIBRARY_PATH";
       };
     };
 

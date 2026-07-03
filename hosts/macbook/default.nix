@@ -55,7 +55,7 @@ in
       "google-benchmark"
       "cloudflare-wrangler"
       "graphviz"
-      "qwen-code"
+      "llvm"
     ];
     casks = [
       "fork"
@@ -71,6 +71,10 @@ in
       "obsidian"
       "ollama-app"
       "eudic"
+      "bruno"
+      "notion"
+      "raspberry-pi-imager"
+      "android-studio"
     ];
   };
 
