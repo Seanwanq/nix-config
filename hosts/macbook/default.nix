@@ -56,6 +56,17 @@ in
       "cloudflare-wrangler"
       "graphviz"
       "llvm"
+      "openconnect"
+      "zig"
+      "helix"
+      "neocmakelsp"
+      "cmake-language-server"
+      "docker-compose-langserver"
+      "yaml-language-server"
+      "marksman"
+      "markdown-oxide"
+      "zls"
+      "pandoc"
     ];
     casks = [
       "fork"
@@ -75,6 +86,8 @@ in
       "notion"
       "raspberry-pi-imager"
       "android-studio"
+      "font-source-han-serif-vf"
+      "docker-desktop"
     ];
   };
 

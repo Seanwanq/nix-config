@@ -26,8 +26,6 @@ in
     unzip
     p7zip
 
-    openconnect
-
     rustup
     fastfetch
 
@@ -40,7 +38,6 @@ in
 
     pkgs-unstable.typst
 
-    helix
     emacs
     pkgs-unstable.dbeaver-bin
     localsend

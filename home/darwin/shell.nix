@@ -9,7 +9,7 @@ in
 {
   programs.ghostty = {
     enable = true;
-    package = pkgs-unstable.ghostty-bin; # macOS 通过 brew cask 安装，不从 nixpkgs 安装（nixpkgs 的包只支持 Linux）
+    package = pkgs-unstable.ghostty-bin;
     enableZshIntegration = true;
     settings = {
       # ── 外观 ──────────────────────────────────────────────────────────
@@ -72,6 +72,9 @@ in
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      initContent = ''
+        eval "$(fnm env --use-on-cd --shell zsh)"
+      '';
       shellAliases = {
         vpn-work = "sudo openconnect --user=siyuan.wang --authgroup=NDS-AnyConnect vpn.nds.global";
         z = "eza";
