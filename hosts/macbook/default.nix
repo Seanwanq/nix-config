@@ -67,6 +67,8 @@ in
       "markdown-oxide"
       "zls"
       "pandoc"
+      "sleepwatcher"
+      "neovim"
     ];
     casks = [
       "fork"
@@ -88,6 +90,8 @@ in
       "android-studio"
       "font-source-han-serif-vf"
       "docker-desktop"
+      "dbeaver-community"
+      "thaw"
     ];
   };
 

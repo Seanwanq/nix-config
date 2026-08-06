@@ -39,7 +39,6 @@ in
     pkgs-unstable.typst
 
     emacs
-    pkgs-unstable.dbeaver-bin
     localsend
     pkgs-unstable.code-cursor
     pkgs-unstable.cursor-cli

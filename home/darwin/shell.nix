@@ -13,7 +13,7 @@ in
     enableZshIntegration = true;
     settings = {
       # ── 外观 ──────────────────────────────────────────────────────────
-      theme = "catppuccin-mocha";
+      theme = "dark:Horizon,light:Horizon Bright";
       font-family = font;
       font-size = 13;
       font-thicken = true; # macOS 专属：让字体笔画更粗，屏幕上更清晰
@@ -36,34 +36,6 @@ in
       window-padding-y = 4;
       mouse-hide-while-typing = true;
     };
-
-    themes = {
-      catppuccin-mocha = {
-        background = "1e1e2e";
-        cursor-color = "f5e0dc";
-        foreground = "cdd6f4";
-        palette = [
-          "0=#45475a"
-          "1=#f38ba8"
-          "2=#a6e3a1"
-          "3=#f9e2af"
-          "4=#89b4fa"
-          "5=#f5c2e7"
-          "6=#94e2d5"
-          "7=#bac2de"
-          "8=#585b70"
-          "9=#f38ba8"
-          "10=#a6e3a1"
-          "11=#f9e2af"
-          "12=#89b4fa"
-          "13=#f5c2e7"
-          "14=#94e2d5"
-          "15=#a6adc8"
-        ];
-        selection-background = "353749";
-        selection-foreground = "cdd6f4";
-      };
-    };
   };
 
   programs = {
@@ -76,7 +48,6 @@ in
         eval "$(fnm env --use-on-cd --shell zsh)"
       '';
       shellAliases = {
-        vpn-work = "sudo openconnect --user=siyuan.wang --authgroup=NDS-AnyConnect vpn.nds.global";
         z = "eza";
         f = "fastfetch";
       };
@@ -91,6 +62,8 @@ in
         CPATH = "/opt/homebrew/include:$CPATH";
         CMAKE_INCLUDE_PATH = "/opt/homebrew/include:$CMAKE_INCLUDE_PATH";
         CMAKE_LIBRARY_PATH = "/opt/homebrew/lib:$CMAKE_LIBRARY_PATH";
+        EDITOR = "nvim";
+        VISUAL = "nvim";
       };
     };
 

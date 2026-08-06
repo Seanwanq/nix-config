@@ -4,6 +4,6 @@
     ./shell.nix
     ./programs.nix
     ./git.nix
-    ./nvim.nix
+    # ./nvim.nix
   ];
 }
