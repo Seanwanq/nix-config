@@ -38,7 +38,6 @@ in
 
     pkgs-unstable.typst
 
-    emacs
     localsend
     pkgs-unstable.code-cursor
     pkgs-unstable.cursor-cli

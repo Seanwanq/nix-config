@@ -13,7 +13,8 @@ in
     enableZshIntegration = true;
     settings = {
       # ── 外观 ──────────────────────────────────────────────────────────
-      theme = "dark:Horizon,light:Horizon Bright";
+      # theme = "dark:Horizon,light:Horizon Bright";
+      theme = "Horizon";
       font-family = font;
       font-size = 13;
       font-thicken = true; # macOS 专属：让字体笔画更粗，屏幕上更清晰
@@ -28,6 +29,8 @@ in
       macos-option-as-alt = true;
       # 标题栏透明，背景色延伸到标题栏，视觉上更统一
       macos-titlebar-style = "transparent";
+      background-opacity = 0.8;
+      background-blur = "macos-glass-regular";
 
       # ── 通用设置 ──────────────────────────────────────────────────────
       window-decoration = true;
@@ -64,6 +67,8 @@ in
         CMAKE_LIBRARY_PATH = "/opt/homebrew/lib:$CMAKE_LIBRARY_PATH";
         EDITOR = "nvim";
         VISUAL = "nvim";
+        DOTNET_ROOT =
+            "${pkgs-unstable.dotnet-sdk_10}/share/dotnet";
       };
     };
 
