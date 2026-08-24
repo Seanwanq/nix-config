@@ -80,7 +80,6 @@ in
       "steam"
       "nutstore"
       "visual-studio-code"
-      "grandperspective"
       "obsidian"
       "ollama-app"
       "eudic"
@@ -92,6 +91,7 @@ in
       "docker-desktop"
       "dbeaver-community"
       "thaw"
+      "orchard"
     ];
   };
 

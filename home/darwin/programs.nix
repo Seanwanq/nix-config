@@ -39,8 +39,6 @@ in
     pkgs-unstable.typst
 
     localsend
-    pkgs-unstable.code-cursor
-    pkgs-unstable.cursor-cli
     pkgs-unstable.mos
     pkgs-unstable.dotnet-sdk_10
     pkgs-unstable.dioxus-cli
