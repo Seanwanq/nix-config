@@ -15,6 +15,7 @@ in
       # ── 外观 ──────────────────────────────────────────────────────────
       # theme = "dark:Horizon,light:Horizon Bright";
       theme = "Horizon";
+      window-theme = "dark";
       font-family = font;
       font-size = 13;
       font-thicken = true; # macOS 专属：让字体笔画更粗，屏幕上更清晰
@@ -28,7 +29,7 @@ in
       # 将 Option 键作为 Alt 键，使 shell 快捷键（如 Alt+F/B 等）正常工作
       macos-option-as-alt = true;
       # 标题栏透明，背景色延伸到标题栏，视觉上更统一
-      macos-titlebar-style = "transparent";
+      macos-titlebar-style = "native";
       background-opacity = 0.8;
       background-blur = "macos-glass-regular";
 

@@ -69,6 +69,7 @@ in
       "pandoc"
       "sleepwatcher"
       "neovim"
+      "gh"
     ];
     casks = [
       "fork"
@@ -89,9 +90,11 @@ in
       "android-studio"
       "font-source-han-serif-vf"
       "docker-desktop"
-      "dbeaver-community"
-      "thaw"
       "orchard"
+      "dbx"
+      "utm@beta"
+      "zed"
+      "claude-code"
     ];
   };
 
