@@ -40,3 +40,5 @@ check-mbp:
 gc:
   nix-collect-garbage -d
 
+gc-30d:
+  sudo nix-collect-garbage --delete-older-than 30d
