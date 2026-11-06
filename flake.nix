@@ -25,17 +25,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/release-26.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nvim-config = {
       url = "github:Seanwanq/nvim-config";
       flake = false;
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, nix-darwin, ... }: {
-    # ========================================================================
-    # NixOS（Hyper-V 虚拟机，无图形界面）
-    # ========================================================================
-    nixosConfigurations.nixos-hv = let
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, nix-darwin, ... }: let
+    # NixOS 主机 + Home Manager（用户 sean）
+    mkNixos = { host, home }: let
       username = "sean";
       specialArgs = { inherit inputs username nixpkgs-unstable; };
     in
@@ -43,7 +46,7 @@
         inherit specialArgs;
 
         modules = [
-          ./hosts/nixos-hv
+          ./hosts/${host}
           ./users/${username}/nixos.nix
 
           home-manager.nixosModules.home-manager
@@ -54,23 +57,18 @@
 
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.${username} = {
-              imports = [ ./users/${username}/home-hv.nix ];
+              imports = [ ./users/${username}/${home} ];
             };
           }
         ];
       };
+  in {
+    nixosConfigurations = {
+      # Hyper-V 虚拟机，无图形界面
+      nixos-hv = mkNixos { host = "nixos-hv"; home = "home-hv.nix"; };
 
-    # ========================================================================
-    # Home Manager 独立配置（WSL）
-    # ========================================================================
-    homeConfigurations."sean@wsl" = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      extraSpecialArgs = {
-        inherit inputs nixpkgs-unstable;
-        username = "sean";
-      };
-
-      modules = [ ./users/sean/home-wsl.nix ];
+      # WSL2（NixOS-WSL），图形程序走 WSLg
+      nixos-wsl = mkNixos { host = "nixos-wsl"; home = "home-wsl.nix"; };
     };
 
     # ========================================================================

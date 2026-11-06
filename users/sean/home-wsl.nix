@@ -1,7 +1,7 @@
 { ... }:
 {
   # ============================================================================
-  # Sean's Home Manager Configuration for WSL
+  # Sean's Home Manager Configuration for NixOS-WSL
   # ============================================================================
 
   imports = [

@@ -19,5 +19,14 @@
   # Hyper-V 集成服务（心跳、KVP 上报 IP、时间同步、关机等）
   virtualisation.hypervGuest.enable = true;
 
+  # SSH（仅密钥登录）
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+    };
+  };
+
   system.stateVersion = "26.05";
 }

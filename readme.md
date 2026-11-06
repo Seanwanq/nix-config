@@ -3,10 +3,28 @@
 | 目录 | 用途 |
 |---|---|
 | `home/darwin` | macOS 的 Home Manager 配置 |
-| `home/linux` | Linux 的 Home Manager 配置（虚拟机与 WSL 共用，无 GUI） |
-| `modules/nixos.nix` | NixOS 基础系统配置（用户、Nix、SSH） |
-| `hosts/nixos-hv` | Hyper-V 虚拟机 |
+| `home/linux` | Linux 的 Home Manager 配置（虚拟机与 WSL 共用） |
+| `modules/nixos.nix` | NixOS 基础系统配置（用户、Nix、nix-ld） |
+| `hosts/nixos-hv` | Hyper-V 虚拟机（无图形界面，SSH） |
+| `hosts/nixos-wsl` | WSL2（NixOS-WSL，图形程序走 WSLg + GPU） |
 | `hosts/macbook` | MacBook Pro（nix-darwin） |
+
+## WSL2（nixos-wsl）
+
+在任意一台 NixOS 上（例如 nixos-hv）生成安装包，用户 `sean` 已预设好：
+
+```bash
+just wsl-tarball   # 生成 ./nixos.wsl
+```
+
+拷到 Windows 后（需要 WSL ≥ 2.4.4）：
+
+```powershell
+wsl --install --from-file nixos.wsl --name NixOS
+wsl -d NixOS
+```
+
+进入后克隆仓库并更新：`git clone https://github.com/Seanwanq/nix-config.git ~/nix-config`，之后 `just update-wsl`。
 
 ## Hyper-V 虚拟机（nixos-hv）
 

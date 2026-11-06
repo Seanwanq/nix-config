@@ -18,17 +18,22 @@ update-hv:
 check-hv:
   sudo nixos-rebuild dry-run --flake .#nixos-hv
 
-# 更新 WSL 用户配置
+# 构建并切换 NixOS-WSL 配置
 build-wsl:
-  nix shell github:nix-community/home-manager/release-26.05#home-manager -c home-manager switch --flake .#sean@wsl
+  sudo nixos-rebuild switch --flake .#nixos-wsl
 
-build-wsl-fresh:
-  mkdir -p ~/.config/nix && echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
-  nix shell github:nix-community/home-manager/release-26.05#home-manager -c home-manager switch --flake .#sean@wsl
+# 从 GitHub 拉取最新配置并切换 NixOS-WSL
+update-wsl:
+  git pull --ff-only
+  sudo nixos-rebuild switch --flake .#nixos-wsl
 
-# 检查 Home Manager 配置（不应用）
+# 测试 NixOS-WSL 配置（不应用）
 check-wsl:
-  nix shell github:nix-community/home-manager/release-26.05#home-manager -c home-manager build --flake .#sean@wsl
+  sudo nixos-rebuild dry-run --flake .#nixos-wsl
+
+# 生成 NixOS-WSL 安装包 nixos.wsl（在任意 NixOS 上运行，例如 nixos-hv）
+wsl-tarball:
+  sudo nix run .#nixosConfigurations.nixos-wsl.config.system.build.tarballBuilder
 
 # 应用 MacBook Pro 的 nix-darwin 配置。
 # 首次运行前请先执行 bootstrap：

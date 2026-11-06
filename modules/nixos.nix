@@ -29,7 +29,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # 让 rustup / uv / VS Code Remote 等下载的动态链接程序可以运行
+  # 让 rustup / uv / VS Code Remote（含 WSL）等下载的动态链接程序可以运行
   programs.nix-ld.enable = true;
 
   # ============================================================================
@@ -37,17 +37,6 @@
   # ============================================================================
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
-
-  # ============================================================================
-  # SSH（仅密钥登录）
-  # ============================================================================
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-    };
-  };
 
   environment.systemPackages = with pkgs; [
     git
