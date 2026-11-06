@@ -95,6 +95,10 @@ in
       "utm@beta"
       "zed"
       "claude-code"
+      "thebrowsercompany-dia"
+      "affinity"
+      "blender"
+      "clickshare"
     ];
   };
 
