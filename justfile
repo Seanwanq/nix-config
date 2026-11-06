@@ -13,6 +13,14 @@ build-g15:
 check-g15:
   sudo nixos-rebuild dry-run --flake .#dell-g15
 
+# 构建并切换 Hyper-V 虚拟机配置
+build-hv:
+  sudo nixos-rebuild switch --flake .#nixos-hv
+
+# 测试 Hyper-V 虚拟机配置（不应用）
+check-hv:
+  sudo nixos-rebuild dry-run --flake .#nixos-hv
+
 # 更新 WSL 用户配置
 build-wsl:
   nix shell github:nix-community/home-manager/release-26.05#home-manager -c home-manager switch --flake .#sean@wsl

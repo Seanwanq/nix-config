@@ -102,6 +102,36 @@
           ];
         };
 
+      # Hyper-V 虚拟机，Home Manager 复用 G15 的用户配置
+      nixos-hv = let
+        username = "sean";
+        specialArgs = {inherit username inputs;};
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+
+          modules = [
+            ./hosts/nixos-hv
+            ./users/${username}/nixos.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+
+              home-manager.extraSpecialArgs = inputs // specialArgs;
+              home-manager.users.${username} = {
+                imports = [
+                  ./users/${username}/home-g15.nix
+                  inputs.noctalia.homeModules.default
+                ];
+              };
+            }
+          ];
+        };
+
       wsl = let
         username = "sean";
         specialArgs = {inherit username inputs;};

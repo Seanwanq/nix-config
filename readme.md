@@ -1,4 +1,22 @@
-`sudo nixos-rebuild switch --flake .#nixos-vm`
+## Hyper-V 虚拟机（nixos-hv）
+
+虚拟机：第 2 代、关闭 Secure Boot，从 NixOS minimal ISO 启动。在 live 环境中（`sudo -i`）：
+
+```bash
+parted /dev/sda -- mklabel gpt
+parted /dev/sda -- mkpart ESP fat32 1MB 1GB
+parted /dev/sda -- set 1 esp on
+parted /dev/sda -- mkpart root ext4 1GB 100%
+mkfs.fat -F 32 -n boot /dev/sda1
+mkfs.ext4 -L nixos /dev/sda2
+mount /dev/disk/by-label/nixos /mnt
+mkdir -p /mnt/boot && mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
+
+nixos-install --flake /path/to/nix-config#nixos-hv
+nixos-enter --root /mnt -c 'passwd sean'
+```
+
+卷标 `boot` / `nixos` 必须与 `hosts/nixos-hv/hardware-configuration.nix` 一致。之后更新：`just build-hv`。
 
 ## macOS (MacBook Pro) 快速开始
 
