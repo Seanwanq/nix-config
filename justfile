@@ -9,22 +9,12 @@ update-dependency:
 build-hv:
   sudo nixos-rebuild switch --flake .#nixos-hv
 
-# 从 GitHub 拉取最新配置并切换 Hyper-V 虚拟机
-update-hv:
-  git pull --ff-only
-  sudo nixos-rebuild switch --flake .#nixos-hv
-
 # 测试 Hyper-V 虚拟机配置（不应用）
 check-hv:
   sudo nixos-rebuild dry-run --flake .#nixos-hv
 
 # 构建并切换 NixOS-WSL 配置
 build-wsl:
-  sudo nixos-rebuild switch --flake .#nixos-wsl
-
-# 从 GitHub 拉取最新配置并切换 NixOS-WSL
-update-wsl:
-  git pull --ff-only
   sudo nixos-rebuild switch --flake .#nixos-wsl
 
 # 测试 NixOS-WSL 配置（不应用）
