@@ -4,6 +4,7 @@
   imports = [
     inputs.nixos-wsl.nixosModules.default
     ../../modules/nixos.nix
+    ./niri.nix
   ];
 
   wsl = {
@@ -14,6 +15,9 @@
     # 在 Windows 开始菜单中生成 GUI 程序的快捷方式
     startMenuLaunchers = true;
   };
+
+  # Mesa 的 d3d12 驱动在运行时 dlopen libd3d12.so，需要能在这里找到（WSLg 中所有图形程序）
+  environment.sessionVariables.LD_LIBRARY_PATH = [ "/run/opengl-driver/lib" ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
   networking.hostName = "nixos-wsl";

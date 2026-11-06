@@ -7,5 +7,6 @@
   imports = [
     ../../home/linux
     ../../home/linux/wsl.nix
+    ../../home/linux/niri.nix
   ];
 }
