@@ -3,8 +3,6 @@
 
   # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
-    # substituers will be appended to the default substituters when fetching packages
-    # nix community's cache server
     extra-substituters = [
       "https://nix-community.cachix.org"
     ];
@@ -14,53 +12,12 @@
   };
 
   inputs = {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-26.05";
-    };
-    nixpkgs-unstable = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    catppuccin-bat = {
-      url = "github:catppuccin/bat";
-      flake = false;
-    };
-
-    yazi-dracula = {
-      url = "github:dracula/yazi";
-      flake = false;
-    };
-
-    yazi-plugins = {
-      url = "github:yazi-rs/plugins";
-      flake = false;
-    };
-
-    nvim-config = {
-      url = "github:Seanwanq/nvim-config";
-      flake = false;
-    };
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
-      # to have it up-to-date or simply don't specify the nixpkgs input
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.quickshell.follows = "quickshell";
     };
 
     nix-darwin = {
@@ -68,122 +25,52 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nvim-config = {
+      url = "github:Seanwanq/nvim-config";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, home-manager, nix-darwin, ... }: {
-    nixosConfigurations = {
-
-      dell-g15 = let
-        username = "sean";
-        specialArgs = {inherit username inputs;};
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-
-          modules = [
-            ./hosts/dell-g15
-            ./users/${username}/nixos.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = {
-                imports = [
-                  ./users/${username}/home-g15.nix
-                  inputs.noctalia.homeModules.default
-                ];
-              };
-            }
-          ];
-        };
-
-      # Hyper-V 虚拟机，Home Manager 复用 G15 的用户配置
-      nixos-hv = let
-        username = "sean";
-        specialArgs = {inherit username inputs;};
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-
-          modules = [
-            ./hosts/nixos-hv
-            ./users/${username}/nixos.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = {
-                imports = [
-                  ./users/${username}/home-g15.nix
-                  inputs.noctalia.homeModules.default
-                ];
-              };
-            }
-          ];
-        };
-
-      wsl = let
-        username = "sean";
-        specialArgs = {inherit username inputs;};
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-
-          modules = [
-            ./hosts/wsl
-            ./users/${username}/nixos.nix
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-
-              home-manager.extraSpecialArgs = inputs // specialArgs;
-              home-manager.users.${username} = {
-                imports = [
-                  ./users/${username}/home-wsl.nix
-                  inputs.noctalia.homeModules.default
-                ];
-              };
-            }
-          ];
-        };
-    };
-
     # ========================================================================
-    # Home Manager 独立配置（用于非 NixOS 系统如 WSL）
+    # NixOS（Hyper-V 虚拟机，无图形界面）
     # ========================================================================
-    homeConfigurations = {
-      "sean@wsl" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {
-          inherit inputs;
-          username = "sean";
-          nixpkgs-unstable = inputs.nixpkgs-unstable;
-          catppuccin-bat = inputs.catppuccin-bat;
-          yazi-dracula = inputs.yazi-dracula;
-          yazi-plugins = inputs.yazi-plugins;
-          nvim-config = inputs.nvim-config;
-        };
+    nixosConfigurations.nixos-hv = let
+      username = "sean";
+      specialArgs = { inherit inputs username nixpkgs-unstable; };
+    in
+      nixpkgs.lib.nixosSystem {
+        inherit specialArgs;
 
         modules = [
-          ./users/sean/home-wsl.nix
-          inputs.noctalia.homeModules.default
+          ./hosts/nixos-hv
+          ./users/${username}/nixos.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup";
+
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.users.${username} = {
+              imports = [ ./users/${username}/home-hv.nix ];
+            };
+          }
         ];
       };
 
+    # ========================================================================
+    # Home Manager 独立配置（WSL）
+    # ========================================================================
+    homeConfigurations."sean@wsl" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      extraSpecialArgs = {
+        inherit inputs nixpkgs-unstable;
+        username = "sean";
+      };
+
+      modules = [ ./users/sean/home-wsl.nix ];
     };
 
     # ========================================================================
@@ -217,4 +104,3 @@
       };
   };
 }
-

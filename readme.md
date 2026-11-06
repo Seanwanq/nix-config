@@ -1,3 +1,13 @@
+## 结构
+
+| 目录 | 用途 |
+|---|---|
+| `home/darwin` | macOS 的 Home Manager 配置 |
+| `home/linux` | Linux 的 Home Manager 配置（虚拟机与 WSL 共用，无 GUI） |
+| `modules/nixos.nix` | NixOS 基础系统配置（用户、Nix、SSH） |
+| `hosts/nixos-hv` | Hyper-V 虚拟机 |
+| `hosts/macbook` | MacBook Pro（nix-darwin） |
+
 ## Hyper-V 虚拟机（nixos-hv）
 
 虚拟机：第 2 代、关闭 Secure Boot，从 NixOS minimal ISO 启动。在 live 环境中（`sudo -i`）：

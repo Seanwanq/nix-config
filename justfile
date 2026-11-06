@@ -5,14 +5,6 @@ default:
 update-dependency:
   nix flake update
 
-# 构建并切换 Dell G15 配置
-build-g15:
-  sudo nixos-rebuild switch --flake .#dell-g15
-
-# 测试 Dell G15 配置（不应用）
-check-g15:
-  sudo nixos-rebuild dry-run --flake .#dell-g15
-
 # 构建并切换 Hyper-V 虚拟机配置
 build-hv:
   sudo nixos-rebuild switch --flake .#nixos-hv
